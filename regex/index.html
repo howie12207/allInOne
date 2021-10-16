@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Regex</title>
+    </head>
+    <body>
+        <div id="email">
+            <p>驗證Email格式</p>
+            <input type="text" /> <span>false</span>
+            <br />
+        </div>
+
+        <div id="en">
+            <p>驗證英文格式</p>
+            <input type="text" /> <span>false</span>
+            <br />
+        </div>
+
+        <div id="cn">
+            <p>驗證中文格式</p>
+            <input type="text" /> <span>false</span>
+            <br />
+        </div>
+
+        <div id="number">
+            <p>驗證數字格式(不含小數點)</p>
+            <input type="text" /> <span>false</span>
+            <br />
+        </div>
+
+        <div id="enAndCn">
+            <p>驗證英文中文格式</p>
+            <input type="text" /> <span>false</span>
+            <br />
+        </div>
+
+        <div id="enAndNumber">
+            <p>驗證英文數字格式(不含小數點)</p>
+            <input type="text" /> <span>false</span>
+            <br />
+        </div>
+    </body>
+    <script src="./regex.js"></script>
+    <script>
+        const emailInput = document.querySelector('#email input');
+        const emailSpan = document.querySelector('#email span');
+        const emailHandle = () => {
+            const inputValue = emailInput.value;
+            emailSpan.textContent = emailReg(inputValue);
+        };
+        emailInput.addEventListener('input', emailHandle);
+
+        const enInput = document.querySelector('#en input');
+        const enSpan = document.querySelector('#en span');
+        const enHandle = () => {
+            const inputValue = enInput.value;
+            enSpan.textContent = enReg(inputValue);
+        };
+        enInput.addEventListener('input', enHandle);
+
+        const cnInput = document.querySelector('#cn input');
+        const cnSpan = document.querySelector('#cn span');
+        const cnHandle = () => {
+            const inputValue = cnInput.value;
+            cnSpan.textContent = cnReg(inputValue);
+        };
+        cnInput.addEventListener('input', cnHandle);
+
+        const numberInput = document.querySelector('#number input');
+        const numberSpan = document.querySelector('#number span');
+        const numberHandle = () => {
+            const inputValue = numberInput.value;
+            numberSpan.textContent = numberReg(inputValue);
+        };
+        numberInput.addEventListener('input', numberHandle);
+
+        const enAndCnInput = document.querySelector('#enAndCn input');
+        const enAndCnSpan = document.querySelector('#enAndCn span');
+        const enAndCnHandle = () => {
+            const inputValue = enAndCnInput.value;
+            enAndCnSpan.textContent = enAndCnReg(inputValue);
+        };
+        enAndCnInput.addEventListener('input', enAndCnHandle);
+
+        const enAndNumberInput = document.querySelector('#enAndNumber input');
+        const enAndNumberSpan = document.querySelector('#enAndNumber span');
+        const enAndNumberHandle = () => {
+            const inputValue = enAndNumberInput.value;
+            enAndNumberSpan.textContent = enAndNumberReg(inputValue);
+        };
+        enAndNumberInput.addEventListener('input', enAndNumberHandle);
+    </script>
+</html>
