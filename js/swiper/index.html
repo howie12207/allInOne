@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+        <title>輪播效果</title>
+
+        <!-- 需使用Vue -->
+        <script src="https://event.franklin.com.tw/commonResources/js/vue-v2.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script> -->
+
+        <!-- 新增處 -->
+        <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.7/css/swiper.min.css"
+            rel="stylesheet"
+        />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.7/js/swiper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue-awesome-swiper@3.1.2/dist/vue-awesome-swiper.js"></script>
+        <script type="text/javascript">
+            Vue.use(window.VueAwesomeSwiper);
+        </script>
+    </head>
+    <body>
+        <div id="content">
+            <div>
+                <span
+                    @click="changeSwiperTab1(1)"
+                    :class="['swiper-tab', swiperTab1 === 1 && 'activate-tab']"
+                    >tab1</span
+                >
+                <span
+                    @click="changeSwiperTab1(2)"
+                    :class="['swiper-tab', swiperTab1 === 2 && 'activate-tab']"
+                    >tab2</span
+                >
+                <span
+                    @click="changeSwiperTab1(3)"
+                    :class="['swiper-tab', swiperTab1 === 3 && 'activate-tab']"
+                    >tab3</span
+                >
+            </div>
+
+            <swiper ref="swiper1" :options="swiperOptions1">
+                <swiper-slide>content1</swiper-slide>
+                <swiper-slide>content2</swiper-slide>
+                <swiper-slide>content3</swiper-slide>
+            </swiper>
+        </div>
+
+        <!-- 需使用Vue -->
+        <script>
+            var content = new Vue({
+                el: '#content',
+                data() {
+                    return {
+                        swiperOptions1: {
+                            autoplay: true,
+                        },
+                        swiperTab1: 1,
+                    };
+                },
+                mounted() {
+                    this.$refs.swiper1.swiper.on('slideChange', this.onSwiperSlideChange1);
+                },
+                methods: {
+                    changeSwiperTab1(target) {
+                        this.swiperTab1 = target;
+                        this.$refs.swiper1.swiper.slideTo(target - 1);
+                        this.$refs.swiper1.swiper.autoplay.start();
+                    },
+                    onSwiperSlideChange1() {
+                        this.swiperTab1 = this.$refs.swiper1.swiper.realIndex + 1;
+                    },
+                },
+            });
+        </script>
+    </body>
+</html>

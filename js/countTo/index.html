@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+        <title>數字跳動效果</title>
+
+        <!-- 需搭配Vue -->
+        <script src="https://event.franklin.com.tw/commonResources/js/vue-v2.min.js"></script>
+
+        <!-- 新增處 -->
+        <script src="./vueCountTo.min.js"></script>
+    </head>
+    <body>
+        <div id="content">
+            <div style="height: 120vh">
+                <p>a</p>
+                <p>a</p>
+                <p>a</p>
+                <p>a</p>
+            </div>
+            <count-to
+                only-show-start="count_to"
+                :start-val="1"
+                :end-val="5000"
+                :duration="3000"
+            ></count-to>
+        </div>
+
+        <!-- 需搭配Vue -->
+        <script>
+            var content = new Vue({
+                el: '#content',
+            });
+        </script>
+    </body>
+</html>

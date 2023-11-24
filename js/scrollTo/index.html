@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+        <title>滾動效果</title>
+
+        <!-- 新增處 -->
+        <script src="./scrollTo.js"></script>
+
+        <!-- 為使用@click 配置Vue -->
+        <script src="https://event.franklin.com.tw/commonResources/js/vue-v2.min.js"></script>
+    </head>
+    <body>
+        <div id="content">
+            <!-- 新增處 -->
+            <button @click="$scrollTo({ target:'.aaa' })">滾動至class aaa</button>
+            <button @click="$scrollTo({ target:'#bbb' })">滾動至id bbb</button>
+            <button @click="$scrollTo({ target:'.ccc', block: 'center'})">
+                滾動至class ccc並置中
+            </button>
+
+            <div class="aaa">
+                <div>aaa</div>
+                <div>aaa</div>
+                <div>aaa</div>
+                <div>aaa</div>
+                <div>aaa</div>
+                <div>aaa</div>
+                <div>aaa</div>
+                <div>aaa</div>
+                <div>aaa</div>
+                <div>aaa</div>
+                <div>aaa</div>
+                <div>aaa</div>
+                <div>aaa</div>
+                <div>aaa</div>
+                <div>aaa</div>
+            </div>
+
+            <div style="line-height: 50vh">-----</div>
+
+            <div id="bbb">
+                <div>bbb</div>
+                <div>bbb</div>
+                <div>bbb</div>
+                <div>bbb</div>
+                <div>bbb</div>
+                <div>bbb</div>
+                <div>bbb</div>
+                <div>bbb</div>
+                <div>bbb</div>
+                <div>bbb</div>
+                <div>bbb</div>
+                <div>bbb</div>
+                <div>bbb</div>
+                <div>bbb</div>
+                <div>bbb</div>
+            </div>
+
+            <div style="line-height: 50vh">-----</div>
+
+            <div class="ccc">
+                <div>ccc</div>
+                <div>ccc</div>
+                <div>ccc</div>
+                <div>ccc</div>
+                <div>ccc</div>
+                <div>ccc</div>
+                <div>ccc</div>
+                <div>ccc</div>
+                <div>ccc</div>
+                <div>ccc</div>
+                <div>ccc</div>
+                <div>ccc</div>
+                <div>ccc</div>
+                <div>ccc</div>
+                <div>ccc</div>
+            </div>
+
+            <div style="line-height: 50vh">-----</div>
+
+            <div style="height: 100vh">ddd</div>
+        </div>
+
+        <!-- 為使用@click 配置Vue -->
+        <script>
+            var content = new Vue({
+                el: '#content',
+            });
+        </script>
+    </body>
+</html>

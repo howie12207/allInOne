@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+        <title>AOS動畫</title>
+
+        <!-- 新增處 -->
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    </head>
+    <body>
+        <div>
+            <div style="min-height: 100vh">
+                <div>aaa</div>
+                <div>aaa</div>
+                <div>aaa</div>
+                <div>aaa</div>
+                <div>aaa</div>
+            </div>
+            <!-- 新增處 -->
+            <div style="min-height: 100vh" data-aos="fade-up">
+                <div>bbb</div>
+                <div>bbb</div>
+                <div>bbb</div>
+                <div>bbb</div>
+                <div>bbb</div>
+            </div>
+            <div style="min-height: 100vh" data-aos="zoom-out">
+                <div>ccc</div>
+                <div>ccc</div>
+                <div>ccc</div>
+                <div>ccc</div>
+                <div>ccc</div>
+            </div>
+        </div>
+
+        <!-- 新增處 -->
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        <script>
+            AOS.init();
+        </script>
+    </body>
+</html>
