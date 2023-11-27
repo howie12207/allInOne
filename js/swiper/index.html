@@ -8,9 +8,30 @@
         />
         <title>輪播效果</title>
 
+        <style>
+            .swiper-tab-bar {
+                overflow-x: auto;
+                display: flex;
+                gap: 16px;
+            }
+            .swiper-tab {
+                flex-shrink: 0;
+                font-size: 20px;
+                color: #977d77;
+                background-color: #eee;
+                padding: 8px 32px;
+                border-radius: 20px;
+                cursor: pointer;
+            }
+            .swiper-tab.activate-tab {
+                color: #2b1812;
+                background-color: #c7f7ff;
+                background-image: linear-gradient(75deg, #c7f7ff 0%, #e7d4cf 100%);
+            }
+        </style>
+
         <!-- 需使用Vue -->
         <script src="https://event.franklin.com.tw/commonResources/js/vue-v2.min.js"></script>
-        <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script> -->
 
         <!-- 新增處 -->
         <link
@@ -26,56 +47,33 @@
     <body>
         <div id="content">
             <div>
-                <span
-                    @click="changeSwiperTab1(1)"
-                    :class="['swiper-tab', swiperTab1 === 1 && 'activate-tab']"
-                    >tab1</span
-                >
-                <span
-                    @click="changeSwiperTab1(2)"
-                    :class="['swiper-tab', swiperTab1 === 2 && 'activate-tab']"
-                    >tab2</span
-                >
-                <span
-                    @click="changeSwiperTab1(3)"
-                    :class="['swiper-tab', swiperTab1 === 3 && 'activate-tab']"
-                    >tab3</span
-                >
+                <div class="swiper-tab-bar">
+                    <span
+                        @click="changeSwiperTab1(1)"
+                        :class="['swiper-tab', swiperTab1 === 1 && 'activate-tab']"
+                        >智能理財</span
+                    >
+                    <span
+                        @click="changeSwiperTab1(2)"
+                        :class="['swiper-tab', swiperTab1 === 2 && 'activate-tab']"
+                        >開戶優惠</span
+                    >
+                    <span
+                        @click="changeSwiperTab1(3)"
+                        :class="['swiper-tab', swiperTab1 === 3 && 'activate-tab']"
+                        >獨享禮遇</span
+                    >
+                </div>
             </div>
 
-            <swiper ref="swiper1" :options="swiperOptions1">
+            <swiper ref="swiper1" :options="swiperOptions1" class="swiper-container1">
                 <swiper-slide>content1</swiper-slide>
                 <swiper-slide>content2</swiper-slide>
                 <swiper-slide>content3</swiper-slide>
             </swiper>
         </div>
 
-        <!-- 需使用Vue -->
-        <script>
-            var content = new Vue({
-                el: '#content',
-                data() {
-                    return {
-                        swiperOptions1: {
-                            autoplay: true,
-                        },
-                        swiperTab1: 1,
-                    };
-                },
-                mounted() {
-                    this.$refs.swiper1.swiper.on('slideChange', this.onSwiperSlideChange1);
-                },
-                methods: {
-                    changeSwiperTab1(target) {
-                        this.swiperTab1 = target;
-                        this.$refs.swiper1.swiper.slideTo(target - 1);
-                        this.$refs.swiper1.swiper.autoplay.start();
-                    },
-                    onSwiperSlideChange1() {
-                        this.swiperTab1 = this.$refs.swiper1.swiper.realIndex + 1;
-                    },
-                },
-            });
-        </script>
+        <!-- 新增處 -->
+        <script src="./main.js"></script>
     </body>
 </html>

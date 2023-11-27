@@ -6,11 +6,11 @@
 
 ```html
 <head>
-    <script src="js/scrollTo/scrollTo.js"></script>
+    <script src="https://event.franklin.com.tw/commonResources/js/scrollTo.min.js"></script>
 </head>
 ```
 
-2. 若功能為點擊後滑動，則在點擊的元素加上 @click="scrollTo('.XXX')" (.XXX 為 class 名稱)
+2. 若功能為點擊後滑動，則在點擊的元素加上 @click="$scrollTo('.XXX')" (.XXX 為 class 名稱)
 
 ```html
 <button @click="$scrollTo({target: '.header'})"></button>

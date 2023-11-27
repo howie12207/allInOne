@@ -34,8 +34,6 @@
 | separator       | 千分位切割符號 | ,       |      |
 | only-show-start | 是否顯示才執行 | false   |      |
 
-|
-
 其餘請參考網站
 
 ## 備註

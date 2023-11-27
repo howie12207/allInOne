@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+        <title>Header</title>
+
+        <link rel="stylesheet" href="/css/normalize.css" />
+
+        <!-- 新增處 -->
+        <style>
+            .header-container {
+                display: flex;
+                align-items: center;
+                padding: 0 16px;
+                height: 48px;
+                background-color: #fafafa;
+                @media (min-width: 768px) {
+                    height: 56px;
+                    padding: 0 40px;
+                }
+            }
+            .header-main {
+                display: flex;
+                align-items: center;
+                text-decoration: none;
+            }
+            .logo-img {
+                display: block;
+                width: 112px;
+                @media (min-width: 768px) {
+                    width: 144px;
+                }
+            }
+            .header-title {
+                font-size: 14px;
+                font-weight: 700;
+                color: #005598;
+                margin: 0 0 0 8px;
+                @media (min-width: 768px) {
+                    font-size: 18px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <!-- 新增處 -->
+        <header class="header-container">
+            <a
+                href="https://www.franklin.com.tw"
+                title="富蘭克林‧國民的基金 官方網站"
+                target="_blank"
+                rel="noreferrer noopener"
+                class="header-main"
+            >
+                <picture
+                    ><source
+                        media="(max-width: 1024px)"
+                        srcset="
+                            https://event.franklin.com.tw/commonResources/images/logo2019.svg
+                        " />
+                    <img
+                        src="https://event.franklin.com.tw/commonResources/images/header-logo.png"
+                        alt="富蘭克林‧國民的基金"
+                        class="logo-img"
+                /></picture>
+                <h1 class="header-title">富蘭克林‧國民的基金</h1>
+            </a>
+        </header>
+    </body>
+</html>

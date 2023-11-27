@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+        <title>Header 帶 menu</title>
+
+        <link rel="stylesheet" href="/css/normalize.css" />
+
+        <!-- 需使用Vue -->
+        <script src="https://event.franklin.com.tw/commonResources/js/vue-v2.min.js"></script>
+
+        <!-- 新增處 -->
+        <style>
+            .header-container {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0 16px;
+                height: 48px;
+                background-color: #fafafa;
+                @media (min-width: 768px) {
+                    height: 56px;
+                    padding: 0 40px;
+                }
+            }
+            .header-main {
+                display: flex;
+                align-items: center;
+                text-decoration: none;
+            }
+            .logo-img {
+                display: block;
+                width: 112px;
+                @media (min-width: 768px) {
+                    width: 144px;
+                }
+            }
+            .header-title {
+                font-size: 14px;
+                font-weight: 700;
+                color: #005598;
+                margin: 0 0 0 8px;
+                @media (min-width: 768px) {
+                    font-size: 18px;
+                }
+            }
+
+            /* 菜單 */
+            .menu-list {
+                display: none;
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+
+                @media (min-width: 1024px) {
+                    display: flex;
+                }
+            }
+            .menu-list.menu-open {
+                @media (max-width: 1023px) {
+                    display: block;
+                    position: fixed;
+                    width: max-content;
+                    top: 64px;
+                    right: 8px;
+                    background-color: rgba(255, 255, 255, 0.9);
+                    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
+                    border-radius: 8px;
+                    animation: show-menu 0.4s;
+                    transform: translateX(0px);
+                }
+            }
+            .menu-list li {
+                text-align: center;
+                @media (min-width: 1024px) {
+                    margin: 0 8px;
+                }
+            }
+            .menu-list a {
+                color: #000;
+                text-decoration: none;
+                transition: color, background-color 0.3s;
+                height: 100%;
+                width: 100%;
+                box-sizing: border-box;
+                @media (max-width: 1023px) {
+                    display: inline-block;
+                    padding: 16px 24px;
+                }
+            }
+            .menu-list a:hover {
+                color: #fff;
+                background-color: #005598;
+                @media (min-width: 1024px) {
+                    color: #005598;
+                }
+            }
+            @keyframes show-menu {
+                0% {
+                    transform: translateX(160px);
+                }
+                100% {
+                    transform: translateX(0px);
+                }
+            }
+
+            /* 小尺寸菜單Icon */
+            .hamberger {
+                position: fixed;
+                right: 8px;
+                top: 4px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-evenly;
+                align-items: center;
+                width: 24px;
+                height: 24px;
+                cursor: pointer;
+                background-color: #005598;
+                padding: 8px;
+                border-radius: 8px;
+                @media (min-width: 768px) {
+                    top: 8px;
+                }
+            }
+            .hamberger .hamberger-line {
+                width: 24px;
+                border-radius: 4px;
+                border: 1px solid #fff;
+                background: #fff;
+                transition: 0.4s;
+            }
+            .hamberger.menu-open .hamberger-line-1 {
+                transform: translateY(6.5px) rotate(45deg);
+            }
+            .hamberger.menu-open .hamberger-line-2 {
+                opacity: 0;
+            }
+            .hamberger.menu-open .hamberger-line-3 {
+                transform: translateY(-6.5px) rotate(-45deg);
+            }
+        </style>
+    </head>
+    <body style="height: 500vh">
+        <div id="content">
+            <!-- 新增處 -->
+            <header class="header-container">
+                <a
+                    href="https://www.franklin.com.tw"
+                    title="富蘭克林‧國民的基金 官方網站"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    class="header-main"
+                >
+                    <picture
+                        ><source
+                            media="(max-width: 1024px)"
+                            srcset="
+                                https://event.franklin.com.tw/commonResources/images/logo2019.svg
+                            " />
+                        <img
+                            src="https://event.franklin.com.tw/commonResources/images/header-logo.png"
+                            alt="富蘭克林‧國民的基金"
+                            class="logo-img"
+                    /></picture>
+                    <h1 class="header-title">富蘭克林‧國民的基金</h1>
+                </a>
+
+                <nav>
+                    <ul
+                        :class="['menu-list', isOpenMenu && 'menu-open']"
+                        @click="isOpenMenu = false"
+                    >
+                        <!-- TODO 名稱及行為 -->
+                        <li><a href="#">精選基金</a></li>
+                        <li><a href="#">限時優惠</a></li>
+                        <li><a href="#">智慧理財</a></li>
+                        <li><a href="#">投資秘訣</a></li>
+                    </ul>
+                </nav>
+
+                <div :class="['hamberger', isOpenMenu && 'menu-open']" @click="switchMenu">
+                    <div class="hamberger-line hamberger-line-1"></div>
+                    <div class="hamberger-line hamberger-line-2"></div>
+                    <div class="hamberger-line hamberger-line-3"></div>
+                </div>
+            </header>
+        </div>
+
+        <!-- 新增處 -->
+        <script src="./main.js"></script>
+    </body>
+</html>
