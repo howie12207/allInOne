@@ -16,5 +16,5 @@ export const sideFloatBtnType = 1;
 export const hasAos = true;
 // todo 是否使用輪播
 export const hasSwiper = false;
-// todo 是否使用數字漸變效果
+// 是否使用數字漸變效果
 export const hasCountTo = false;

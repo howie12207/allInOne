@@ -6,7 +6,7 @@
 
 ```html
 <head>
-    <script src="./vueCountTo.min.js"></script>
+    <script src="https://event.franklin.com.tw/commonResources/js/vueCountTo.min.js"></script>
 </head>
 ```
 

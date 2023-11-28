@@ -2,7 +2,15 @@ import fs from 'fs';
 import path from 'path';
 import util from 'util';
 
-import { fileName, title, description, headerType, hasGoTopIcon, hasAos } from './setting.js';
+import {
+    fileName,
+    title,
+    description,
+    headerType,
+    hasGoTopIcon,
+    hasAos,
+    hasCountTo,
+} from './setting.js';
 
 const readFileAsync = util.promisify(fs.readFile);
 const writeFileAsync = util.promisify(fs.writeFile);
@@ -34,6 +42,8 @@ const run = async () => {
     await goTopHandle();
     // 替換aos
     await aosHandle();
+    // 替換countTo
+    await countToHandle();
 
     await writeFileAsync(`./${fileName}/index.html`, indexHtml, 'utf8');
     await writeFileAsync(`./${fileName}/css/style.scss`, styleScss, 'utf8');
@@ -145,6 +155,31 @@ const run = async () => {
             indexHtml = indexHtml
                 .replace(/<!-- aos link -->/g, '')
                 .replace(/<!-- aos script -->/g, '');
+        }
+    }
+    // countTo
+    async function countToHandle() {
+        if (hasCountTo) {
+            const htmlFile = await readFileAsync(`js/countTo/index.html`, 'utf8');
+            // 替換countTo script
+            const newScript = copyData(
+                htmlFile,
+                '<!-- 新增處script start -->',
+                '<!-- 新增處script end -->'
+            );
+            // 替換countTo body
+            const newBody = copyData(
+                htmlFile,
+                '<!-- 新增處body start -->',
+                '<!-- 新增處body end -->'
+            );
+            indexHtml = indexHtml
+                .replace(/<!-- countTo script -->/g, newScript)
+                .replace(/<!-- countTo body -->/g, newBody);
+        } else {
+            indexHtml = indexHtml
+                .replace(/<!-- countTo script -->/g, '')
+                .replace(/<!-- countTo body -->/g, '');
         }
     }
 };
