@@ -6,17 +6,19 @@
             name="viewport"
             content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
         />
-        <title>往上Icon</title>
+        <title>往上浮標</title>
 
         <link rel="stylesheet" href="/css/normalize.css" />
 
         <!-- 需使用Vue -->
         <script src="https://event.franklin.com.tw/commonResources/js/vue-v2.min.js"></script>
 
-        <!-- 新增處 -->
+        <!-- 新增處head script start -->
         <script src="https://event.franklin.com.tw/commonResources/js/scrollTo.min.js"></script>
         <script src="https://kit.fontawesome.com/0389e2f534.js" crossorigin="anonymous"></script>
+        <!-- 新增處head script end -->
         <style>
+            /* 新增處style start */
             .go-top-icon {
                 position: fixed;
                 bottom: 40px;
@@ -50,24 +52,31 @@
                     display: none;
                 }
             }
+
+            .go-top-enter-active,
+            .go-top-leave-active {
+                transition: 0.3s;
+            }
+            .go-top-enter,
+            .go-top-leave-to {
+                transform: translateY(100px);
+            }
+            /* 新增處style end */
         </style>
     </head>
     <body>
         <div id="content" style="min-height: 300vh">
-            <!-- 新增處 -->
-            <div class="go-top-icon" @click="$scrollTo({ target: 'body' })">
-                <i class="fas fa-caret-up go-top-caret-icon"></i>
-                <span class="go-top-text">Top</span>
-            </div>
+            <!-- 新增處body start -->
+            <transition name="go-top">
+                <div v-if="showGoTop" class="go-top-icon" @click="$scrollTo({ target: 'body' })">
+                    <i class="fas fa-caret-up go-top-caret-icon"></i>
+                    <span class="go-top-text">Top</span>
+                </div>
+            </transition>
+            <!-- 新增處body end -->
         </div>
 
-        <script>
-            var content = new Vue({
-                el: '#content',
-                methods: {
-                    handleScroll() {},
-                },
-            });
-        </script>
+        <!-- 需搭配main.js -->
+        <script src="./main.js"></script>
     </body>
 </html>

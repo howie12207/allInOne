@@ -13,8 +13,8 @@
         <!-- 需使用Vue -->
         <script src="https://event.franklin.com.tw/commonResources/js/vue-v2.min.js"></script>
 
-        <!-- 新增處 -->
         <style>
+            /* 新增處style start */
             .header-container {
                 display: flex;
                 align-items: center;
@@ -98,6 +98,7 @@
                 background-color: #005598;
                 @media (min-width: 1024px) {
                     color: #005598;
+                    background-color: initial;
                 }
             }
             @keyframes show-menu {
@@ -127,6 +128,9 @@
                 @media (min-width: 768px) {
                     top: 8px;
                 }
+                @media (min-width: 1024px) {
+                    display: none;
+                }
             }
             .hamberger .hamberger-line {
                 width: 24px;
@@ -144,11 +148,12 @@
             .hamberger.menu-open .hamberger-line-3 {
                 transform: translateY(-6.5px) rotate(-45deg);
             }
+            /* 新增處style end */
         </style>
     </head>
     <body style="height: 500vh">
         <div id="content">
-            <!-- 新增處 -->
+            <!-- 新增處body start -->
             <header class="header-container">
                 <a
                     href="https://www.franklin.com.tw"
@@ -190,9 +195,10 @@
                     <div class="hamberger-line hamberger-line-3"></div>
                 </div>
             </header>
+            <!-- 新增處body end -->
         </div>
 
-        <!-- 新增處 -->
+        /* 需搭配main.js */
         <script src="./main.js"></script>
     </body>
 </html>
