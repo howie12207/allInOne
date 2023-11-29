@@ -10,6 +10,7 @@ import {
     hasGoTopIcon,
     hasAos,
     hasCountTo,
+    useCustomScrollBar,
 } from './setting.js';
 
 const readFileAsync = util.promisify(fs.readFile);
@@ -46,6 +47,8 @@ const run = async () => {
     await aosHandle();
     // 替換countTo
     await countToHandle();
+    // 替換scrollBar
+    await scrollBarHandle();
 
     await writeFileAsync(`./${fileName}/index.html`, indexHtml, 'utf8');
     await writeFileAsync(`./${fileName}/css/style.scss`, styleScss, 'utf8');
@@ -182,6 +185,16 @@ const run = async () => {
             indexHtml = indexHtml
                 .replace(/<!-- countTo script -->/g, '')
                 .replace(/<!-- countTo body -->/g, '');
+        }
+    }
+    // scrollBar
+    async function scrollBarHandle() {
+        if (useCustomScrollBar) {
+            const commonStyle = await readFileAsync('css/common.css', 'utf8');
+            const newStyle = copyData(commonStyle, '/* scrollBar start */', '/* scrollBar end */');
+            styleScss = styleScss.replace(/\/\/ scrollBar style/g, newStyle);
+        } else {
+            styleScss = styleScss.replace(/\/\/ scrollBar style/g, '');
         }
     }
 };
