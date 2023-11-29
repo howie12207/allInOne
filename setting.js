@@ -5,7 +5,9 @@ export const title = '2';
 // 描述
 export const description = '3';
 // header類型 1:一般 2:帶menu
-export const headerType = 2;
+export const headerType = 1;
+// 是否有Banner
+export const hasBanner = false;
 // 是否有右下角往上滾Icon
 export const hasGoTopIcon = true;
 // todo footer類型

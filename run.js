@@ -7,6 +7,7 @@ import {
     title,
     description,
     headerType,
+    hasBanner,
     hasGoTopIcon,
     hasAos,
     hasCountTo,
@@ -41,6 +42,8 @@ const run = async () => {
 
     // 替換header
     await headerHandle();
+    // 替換banner
+    await bannerHandle();
     // 替換goTop
     await goTopHandle();
     // 替換aos
@@ -84,6 +87,24 @@ const run = async () => {
         } else {
             mainJs = mainJs.replace(/\/\/ header data/g, '');
             mainJs = mainJs.replace(/\/\/ header methods/g, '');
+        }
+    }
+    // banner
+    async function bannerHandle() {
+        if (hasBanner) {
+            const htmlFile = await readFileAsync(`components/banner/index.html`, 'utf8');
+            const newStyle = copyData(htmlFile, '/* 新增處style start */', '/* 新增處style end */');
+            styleScss = styleScss.replace(/\/\/ banner style/g, newStyle);
+
+            const newBody = copyData(
+                htmlFile,
+                '<!-- 新增處body start -->',
+                '<!-- 新增處body end -->'
+            );
+            indexHtml = indexHtml.replace(/<!-- banner body -->/g, newBody);
+        } else {
+            styleScss = styleScss.replace(/\/\/ banner style/g, '');
+            indexHtml = indexHtml.replace(/<!-- banner body -->/g, '');
         }
     }
     // goTop
