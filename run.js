@@ -17,9 +17,11 @@ const writeFileAsync = util.promisify(fs.writeFile);
 const copyFileAsync = util.promisify(fs.copyFile);
 
 const run = async () => {
-    if (fileName === '') return console.error('請填專案名稱');
+    if (fileName.trim() === '') return console.error('請填專案名稱');
     if (title === '') return console.error('請填標題');
     if (description === '') return console.error('請填描述');
+    const nameLimit = ['components', 'css', 'js', 'sample'];
+    if (nameLimit.includes(fileName.toLowerCase().trim())) return console.log('請更改專案名稱');
 
     clean(fileName);
 
@@ -59,7 +61,7 @@ const run = async () => {
 
         // 替換body
         const newBody = copyData(htmlFile, '<!-- 新增處body start -->', '<!-- 新增處body end -->');
-        indexHtml = indexHtml.replace(/<!-- header body  -->/g, newBody);
+        indexHtml = indexHtml.replace(/<!-- header body -->/g, newBody);
 
         // 替換main.js
         if (headerType === 2) {
@@ -94,7 +96,7 @@ const run = async () => {
                 '<!-- 新增處body start -->',
                 '<!-- 新增處body end -->'
             );
-            indexHtml = indexHtml.replace(/<!-- goTop body  -->/g, newBody);
+            indexHtml = indexHtml.replace(/<!-- goTop body -->/g, newBody);
             // 替換goTop main.js
             const mainJsFile = await readFileAsync(`components/goTop/main.js`, 'utf8');
             const newMainJsData = copyData(
@@ -124,7 +126,7 @@ const run = async () => {
                 .replace(/\/\/ goTop methods/g, newMainJsMethods);
         } else {
             styleScss = styleScss.replace(/\/\/ goTop style/g, '');
-            indexHtml = styleScss.replace(/<!-- goTop body  -->/g, '');
+            indexHtml = styleScss.replace(/<!-- goTop body -->/g, '');
             mainJs = mainJs
                 .replace(/\/\/ goTop data/g, '')
                 .replace(/\/\/ goTop mounted/g, '')
