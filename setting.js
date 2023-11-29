@@ -10,10 +10,10 @@ export const headerType = 1;
 export const hasBanner = false;
 // 是否有右下角往上滾Icon
 export const hasGoTopIcon = true;
-// todo footer類型
-export const footerType = 1;
-// todo 側邊懸浮按鈕類型 1: 無 ...
-export const sideFloatBtnType = 1;
+// footer
+export const footerType = true;
+// 側邊懸浮按鈕類型
+export const HasFloatRightBtn = true;
 // 是否使用aos
 export const hasAos = true;
 // todo 是否使用輪播
