@@ -1,5 +1,8 @@
 var content = new Vue({
     el: '#content',
+    components: {
+        // discount components
+    },
     data() {
         return {
             // header data

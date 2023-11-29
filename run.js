@@ -14,6 +14,7 @@ import {
     useCustomScrollBar,
     HasFloatRightBtn,
     footerType,
+    hasDiscount,
 } from './setting.js';
 
 const readFileAsync = util.promisify(fs.readFile);
@@ -46,12 +47,18 @@ const run = async () => {
     await headerHandle();
     // 替換banner
     await bannerHandle();
+    // 加入footer
+    await footerHandle();
     // 替換goTop
     await goTopHandle();
-    // 替換aos
-    await aosHandle();
+    // 加入floatRightBtn
+    await floatRightBtnHandle();
+    // 替換discount
+    await discountHandle();
     // 替換countTo
     await countToHandle();
+    // 替換aos
+    await aosHandle();
     // 替換scrollBar
     await scrollBarHandle();
     // 加入floatRightBtn
@@ -113,6 +120,20 @@ const run = async () => {
             indexHtml = indexHtml.replace(/<!-- banner body -->/g, '');
         }
     }
+    // footer
+    async function footerHandle() {
+        if (!footerType) return;
+        let htmlFile = await readFileAsync(`components/footer/index.html`, 'utf8');
+
+        // 新增style
+        const newStyle = copyData(htmlFile, '/* 新增處style start */', '/* 新增處style end */');
+        styleScss = `${styleScss}
+        ${newStyle}`;
+
+        // 替換body
+        const newBody = copyData(htmlFile, '<!-- 新增處body start -->', '<!-- 新增處body end -->');
+        indexHtml = indexHtml.replace(/<!-- footer body -->/g, newBody);
+    }
     // goTop
     async function goTopHandle() {
         if (hasGoTopIcon) {
@@ -164,29 +185,54 @@ const run = async () => {
                 .replace(/\/\/ goTop methods/g, '');
         }
     }
-    // aos
-    async function aosHandle() {
-        if (hasAos) {
-            const htmlFile = await readFileAsync(`js/aos/index.html`, 'utf8');
-            // 替換aos link
-            const newLink = copyData(
-                htmlFile,
-                '<!-- 新增處link start -->',
-                '<!-- 新增處link end -->'
-            );
-            // 替換aos script
+    // floatRightBtn
+    async function floatRightBtnHandle() {
+        if (!HasFloatRightBtn) return;
+        let htmlFile = await readFileAsync(`components/floatRightBtn/index.html`, 'utf8');
+        // 新增style
+        const newStyle = copyData(htmlFile, '/* 新增處style start */', '/* 新增處style end */');
+        styleScss = `${styleScss}
+        ${newStyle}`;
+
+        // 替換body
+        const newBody = copyData(htmlFile, '<!-- 新增處body start -->', '<!-- 新增處body end -->');
+        indexHtml = indexHtml.replace(/<!-- flaotRightBtn body -->/g, newBody);
+    }
+    // discount
+    async function discountHandle() {
+        if (hasDiscount) {
+            const htmlFile = await readFileAsync(`components/discount/index.html`, 'utf8');
+            // 替換discount script
             const newScript = copyData(
                 htmlFile,
                 '<!-- 新增處script start -->',
                 '<!-- 新增處script end -->'
             );
+            // 替換discount body
+            const newBody = copyData(
+                htmlFile,
+                '<!-- 新增處body start -->',
+                '<!-- 新增處body end -->'
+            );
             indexHtml = indexHtml
-                .replace(/<!-- aos link -->/g, newLink)
-                .replace(/<!-- aos script -->/g, newScript);
+                .replace(/<!-- discount script -->/g, newScript)
+                .replace(/<!-- discount body -->/g, newBody);
+            // 替換discount style
+            const newStyle = copyData(htmlFile, '/* 新增處style start */', '/* 新增處style end */');
+            styleScss = styleScss.replace(/\/\/ discount style/g, newStyle);
+            // 替換mainjs
+            const newComponents = copyData(
+                htmlFile,
+                '// 新增處components start',
+                '// 新增處components end'
+            );
+            mainJs = mainJs.replace(/\/\/ discount components/g, newComponents);
         } else {
             indexHtml = indexHtml
-                .replace(/<!-- aos link -->/g, '')
-                .replace(/<!-- aos script -->/g, '');
+                .replace(/<!-- discount script -->/g, '')
+                .replace(/<!-- discount body -->/g, '');
+            styleScss = styleScss.replace(/\/\/ discount style/g, '');
+            mainJs = mainJs.replace(/\/\/ discount components/g, '');
         }
     }
     // countTo
@@ -212,6 +258,31 @@ const run = async () => {
             indexHtml = indexHtml
                 .replace(/<!-- countTo script -->/g, '')
                 .replace(/<!-- countTo body -->/g, '');
+        }
+    }
+    // aos
+    async function aosHandle() {
+        if (hasAos) {
+            const htmlFile = await readFileAsync(`js/aos/index.html`, 'utf8');
+            // 替換aos link
+            const newLink = copyData(
+                htmlFile,
+                '<!-- 新增處link start -->',
+                '<!-- 新增處link end -->'
+            );
+            // 替換aos script
+            const newScript = copyData(
+                htmlFile,
+                '<!-- 新增處script start -->',
+                '<!-- 新增處script end -->'
+            );
+            indexHtml = indexHtml
+                .replace(/<!-- aos link -->/g, newLink)
+                .replace(/<!-- aos script -->/g, newScript);
+        } else {
+            indexHtml = indexHtml
+                .replace(/<!-- aos link -->/g, '')
+                .replace(/<!-- aos script -->/g, '');
         }
     }
     // scrollBar

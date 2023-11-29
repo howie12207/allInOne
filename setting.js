@@ -22,3 +22,5 @@ export const hasSwiper = false;
 export const hasCountTo = false;
 // 是否使用自定義scrollBar
 export const useCustomScrollBar = false;
+// 是否使用discount組件
+export const hasDiscount = true;

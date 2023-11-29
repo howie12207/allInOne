@@ -1,7 +1,76 @@
+[v-cloak] {
+    opacity: 0;
+}
+
+/* btn */
+.btnArea {
+    text-align: center;
+    font-size: 0px;
+    margin: 8px 0px;
+}
+.btnArea.twoBtn .btn,
+.btnArea.threeBtn .btn {
+    padding-left: 16px;
+    padding-right: 16px;
+    max-width: 50%;
+}
+.btn {
+    display: inline-block;
+    vertical-align: top;
+    padding: 8px 0px;
+    position: relative;
+}
+.btn a,
+.btn button {
+    position: relative;
+    font-size: 20px;
+    display: block;
+    color: #fff;
+    line-height: 50px;
+    border-radius: 30px;
+    transition: 0.3s ease all;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 0px 40px;
+    background: #005598;
+    overflow: hidden;
+    position: relative;
+    text-decoration: none;
+}
+.btn.type2 a,
+.btn.type2 button {
+    background: #519e2f;
+}
+.btn a:hover:before,
+.btn button:hover:before {
+    width: 800px;
+    height: 800px;
+}
+.btn a:hover,
+.btn button:hover {
+    box-shadow: 0px 15px 10px -5px rgba(0, 0, 0, 0.3);
+    text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.7);
+}
+.btn a:before,
+.btn button:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    border-radius: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    width: 0px;
+    height: 0px;
+    transition: 0.6s ease-in-out all;
+}
+
 // header style
 
 // banner style
 
 // goTop style
+
+// discount style
 
 // scrollBar style
