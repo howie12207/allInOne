@@ -4,13 +4,14 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
-        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-
-        <script type="module" src="/components/button/fixedRightBtn.js"></script>
+        <title>右側懸浮按鈕</title>       
+        <link rel="stylesheet" href="/css/normalize.css" />
+        <!-- 新增處head script start -->
         <script src="https://kit.fontawesome.com/0389e2f534.js" crossorigin="anonymous"></script>
+        <!-- 新增處head script end -->
         <style>
-            .fixed-btn-area {
+            /* 新增處style start */
+            .float-right-btn-area {
                 position: fixed;
                 top: 50%;
                 right: 0px;
@@ -19,10 +20,10 @@
                 transform: translateY(-50%);
                 z-index: 2;
             }
-            .fixed-btn {
+            .float-right-btn {
                 margin-bottom: 6px;
             }
-            .fixed-btn a {
+            .float-right-btn a {
                 display: block;
                 text-align: center;
                 width: 43px;
@@ -41,33 +42,33 @@
                 border-radius: 10px 0px 0px 10px;
                 text-decoration: none;
             }
-            .fixed-btn a:hover {
+            .float-right-btn a:hover {
                 background: #00a3e0;
             }
-            .fixed-btn a i {
+            .float-right-btn a i {
                 font-size: 13px;
             }
-            .fixed-btn.type2 a {
+            .float-right-btn.type2 a {
                 background: #519e2f;
             }
-            .fixed-btn.type2 a:hover {
+            .float-right-btn.type2 a:hover {
                 background: #00a3e0;
             }
-            .fixed-btn.type3 a {
+            .float-right-btn.type3 a {
                 background: #00a3e0;
             }
-            .fixed-btn.type3 a:hover {
+            .float-right-btn.type3 a:hover {
                 background: #004790;
             }
             @media screen and (max-width: 991px) {
-                .fixed-btn a {
+                .float-right-btn a {
                     width: 25px;
                     padding: 15px 1px;
                     font-size: 16px;
                 }
             }
             @media screen and (max-width: 767px) {
-                .fixed-btn {
+                .float-right-btn {
                     display: inline-block;
                     vertical-align: middle;
                     width: 100%;
@@ -75,7 +76,7 @@
                     box-sizing: border-box;
                     margin-bottom: 0px;
                 }
-                .fixed-btn-area {
+                .float-right-btn-area {
                     top: auto;
                     bottom: 15px;
                     width: 100%;
@@ -87,7 +88,7 @@
                     -ms-transform: translateY(0);
                     transform: translateY(0);
                 }
-                .fixed-btn a {
+                .float-right-btn a {
                     width: auto;
                     padding: 11px 0px;
                     border-radius: 20px;
@@ -98,17 +99,19 @@
                     border: solid 4px #fff;
                 }
             }
+            /* 新增處style end */
         </style>
     </head>
     <body>
-        <div class="fixed-btn-area">
-            <div class="fixed-btn">
+        <!-- 新增處body start -->
+        <div class="float-right-btn-area">
+            <div class="float-right-btn">
                 <a href="https://etrade.franklin.com.tw/Home/Login" target="_blank" title="立即申購"
                     >立即申購
                     <i class="fas fa-chevron-right"> </i>
                 </a>
             </div>
-            <div class="fixed-btn type2">
+            <div class="float-right-btn type2">
                 <a
                     href="https://etrade.franklin.com.tw/OpenAccount/"
                     target="_blank"
@@ -117,14 +120,13 @@
                     <i class="fas fa-chevron-down"> </i>
                 </a>
             </div>
-            <div class="fixed-btn type3">
-                <a
-                    href="#"
-                    title="錨點"
+            <div class="float-right-btn type3">
+                <a href="#" title="錨點"
                     >錨點
                     <i class="fas fa-chevron-down"> </i>
                 </a>
             </div>
         </div>
+        <!-- 新增處body end -->
     </body>
 </html>
