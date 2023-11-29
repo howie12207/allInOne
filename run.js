@@ -11,6 +11,8 @@ import {
     hasAos,
     hasCountTo,
     useCustomScrollBar,
+    HasFloatRightBtn,
+    footerType,
 } from './setting.js';
 
 const readFileAsync = util.promisify(fs.readFile);
@@ -49,6 +51,10 @@ const run = async () => {
     await countToHandle();
     // 替換scrollBar
     await scrollBarHandle();
+    // 加入floatRightBtn
+    await floatRightBtnHandle();
+    // 加入footer
+    await footerHandle();
 
     await writeFileAsync(`./${fileName}/index.html`, indexHtml, 'utf8');
     await writeFileAsync(`./${fileName}/css/style.scss`, styleScss, 'utf8');
@@ -196,6 +202,33 @@ const run = async () => {
         } else {
             styleScss = styleScss.replace(/\/\/ scrollBar style/g, '');
         }
+    }
+    // floatRightBtn
+    async function floatRightBtnHandle() {
+        if (!HasFloatRightBtn) return;
+        let htmlFile = await readFileAsync(`components/floatRightBtn/index.html`, 'utf8');
+        // 新增style
+        const newStyle = copyData(htmlFile, '/* 新增處style start */', '/* 新增處style end */');
+        styleScss = `${styleScss}
+        ${newStyle}`;
+
+        // 替換body
+        const newBody = copyData(htmlFile, '<!-- 新增處body start -->', '<!-- 新增處body end -->');
+        indexHtml = indexHtml.replace(/<!-- flaotRightBtn body -->/g, newBody);
+    }
+    // footer
+    async function footerHandle() {
+        if (!footerType) return;
+        let htmlFile = await readFileAsync(`components/footer/index.html`, 'utf8');
+
+        // 新增style
+        const newStyle = copyData(htmlFile, '/* 新增處style start */', '/* 新增處style end */');
+        styleScss = `${styleScss}
+        ${newStyle}`;
+
+        // 替換body
+        const newBody = copyData(htmlFile, '<!-- 新增處body start -->', '<!-- 新增處body end -->');
+        indexHtml = indexHtml.replace(/<!-- footer body -->/g, newBody);
     }
 };
 run();
