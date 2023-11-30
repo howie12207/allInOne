@@ -22,7 +22,9 @@
                 padding: 0 16px;
                 height: 48px;
                 background-color: #fafafa;
-                @media (min-width: 768px) {
+            }
+            @media (min-width: 768px) {
+                .header-container {
                     height: 56px;
                     padding: 0 40px;
                 }
@@ -35,7 +37,9 @@
             .logo-img {
                 display: block;
                 width: 112px;
-                @media (min-width: 768px) {
+            }
+            @media (min-width: 768px) {
+                .logo-img {
                     width: 144px;
                 }
             }
@@ -44,7 +48,9 @@
                 font-weight: 700;
                 color: #005598;
                 margin: 0 0 0 8px;
-                @media (min-width: 768px) {
+            }
+            @media (min-width: 768px) {
+                .header-title {
                     font-size: 18px;
                 }
             }
@@ -56,13 +62,14 @@
                 margin: 0;
                 padding: 0;
                 overflow: hidden;
-
-                @media (min-width: 1024px) {
+            }
+            @media (min-width: 1024px) {
+                .menu-list {
                     display: flex;
                 }
             }
-            .menu-list.menu-open {
-                @media (max-width: 1023px) {
+            @media (max-width: 1023px) {
+                .menu-list.menu-open {
                     display: block;
                     position: fixed;
                     width: max-content;
@@ -77,7 +84,9 @@
             }
             .menu-list li {
                 text-align: center;
-                @media (min-width: 1024px) {
+            }
+            @media (min-width: 1024px) {
+                .menu-list li {
                     margin: 0 8px;
                 }
             }
@@ -88,7 +97,9 @@
                 height: 100%;
                 width: 100%;
                 box-sizing: border-box;
-                @media (max-width: 1023px) {
+            }
+            @media (max-width: 1023px) {
+                .menu-list a {
                     display: inline-block;
                     padding: 16px 24px;
                 }
@@ -96,7 +107,9 @@
             .menu-list a:hover {
                 color: #fff;
                 background-color: #005598;
-                @media (min-width: 1024px) {
+            }
+            @media (min-width: 1024px) {
+                .menu-list a:hover {
                     color: #005598;
                     background-color: initial;
                 }
@@ -125,10 +138,14 @@
                 background-color: #005598;
                 padding: 8px;
                 border-radius: 8px;
-                @media (min-width: 768px) {
+            }
+            @media (min-width: 768px) {
+                .hamberger {
                     top: 8px;
                 }
-                @media (min-width: 1024px) {
+            }
+            @media (min-width: 1024px) {
+                .hamberger {
                     display: none;
                 }
             }
@@ -198,7 +215,24 @@
             <!-- 新增處body end -->
         </div>
 
-        /* 需搭配main.js */
-        <script src="./main.js"></script>
+        <script>
+            var content = new Vue({
+                el: '#content',
+                data() {
+                    return {
+                        // 新增處data start
+                        isOpenMenu: false,
+                        // 新增處data end
+                    };
+                },
+                methods: {
+                    // 新增處methods start
+                    switchMenu() {
+                        this.isOpenMenu = !this.isOpenMenu;
+                    },
+                    // 新增處methods end
+                },
+            });
+        </script>
     </body>
 </html>

@@ -87,16 +87,11 @@ const run = async () => {
 
         // 替換main.js
         if (headerType === 2) {
-            const mainJsFile = await readFileAsync(`components/header/main.js`, 'utf8');
-            const newMainJsData = copyData(
-                mainJsFile,
-                '// 新增處js data start',
-                '// 新增處js data end'
-            );
+            const newMainJsData = copyData(htmlFile, '// 新增處data start', '// 新增處data end');
             const newMainJsMethods = copyData(
-                mainJsFile,
-                '// 新增處js methods start',
-                '// 新增處js methods end'
+                htmlFile,
+                '// 新增處methods start',
+                '// 新增處methods end'
             );
             mainJs = mainJs.replace(/\/\/ header data/g, newMainJsData);
             mainJs = mainJs.replace(/\/\/ header methods/g, newMainJsMethods);
