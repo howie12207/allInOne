@@ -15,6 +15,7 @@ import {
     HasFloatRightBtn,
     footerType,
     hasDiscount,
+    hasModal,
 } from './setting.js';
 
 const readFileAsync = util.promisify(fs.readFile);
@@ -65,6 +66,8 @@ const run = async () => {
     await floatRightBtnHandle();
     // 加入footer
     await footerHandle();
+    // 替換modal
+    await modalHandle();
 
     await writeFileAsync(`./${fileName}/index.html`, indexHtml, 'utf8');
     await writeFileAsync(`./${fileName}/css/style.scss`, styleScss, 'utf8');
@@ -295,16 +298,54 @@ const run = async () => {
             styleScss = styleScss.replace(/\/\/ scrollBar style/g, '');
         }
     }
+    // modal
+    async function modalHandle() {
+        if (hasModal) {
+            const htmlFile = await readFileAsync('components/modal/index.html', 'utf8');
+            const newStyle = copyData(htmlFile, '/* 新增處style start */', '/* 新增處style end */');
+            styleScss = styleScss.replace(/\/\/ modal style/g, newStyle);
+
+            const newBody = copyData(
+                htmlFile,
+                '<!-- 新增處body start -->',
+                '<!-- 新增處body end -->'
+            );
+            indexHtml = indexHtml.replace(/<!-- modal body -->/g, newBody);
+
+            const newVueComponents = copyData(
+                htmlFile,
+                '// 新增處vueComponent start',
+                '// 新增處vueComponent end'
+            );
+            const newMethods = copyData(htmlFile, '// 新增處methods start', '// 新增處methods end');
+            mainJs = mainJs
+                .replace('// modal vueComponent', newVueComponents)
+                .replace('// modal methods', newMethods);
+        } else {
+            styleScss = styleScss.replace(/\/\/ modal style/g, '');
+            indexHtml = indexHtml.replace(/<!-- modal body -->/g, '');
+            mainJs = mainJs.replace('// modal vueComponent', '').replace(/\/\/ modal methods/g, '');
+        }
+    }
 };
 run();
 
 function copyData(data, start, end) {
-    data = data.replace(start, '<copyDataStart>').replace(end, '<copyDataEnd>');
+    try {
+        data = data.replace(start, '<copyDataStart>').replace(end, '<copyDataEnd>');
 
-    const pattern = new RegExp(`<copyDataStart>(.*?)<copyDataEnd>`, 's');
-    const match = data.match(pattern);
+        const pattern = new RegExp(`<copyDataStart>(.*?)<copyDataEnd>`, 's');
+        const match = data.match(pattern);
 
-    return match[1].trim();
+        return match[1].trim();
+    } catch (e) {
+        console.error(`
+        data: ${data}
+        start: ${start}
+        end: ${end}
+        複製資料發生錯誤: ${e}
+        `);
+    }
 }
 
 function clean(url) {

@@ -23,4 +23,6 @@ export const hasCountTo = false;
 // 是否使用自定義scrollBar
 export const useCustomScrollBar = false;
 // 是否使用discount組件
-export const hasDiscount = true;
+export const hasDiscount = false;
+// 是否使用彈窗
+export const hasModal = false;

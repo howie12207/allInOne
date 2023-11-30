@@ -2,6 +2,11 @@
     opacity: 0;
 }
 
+body {
+    overscroll-behavior-y: contain;
+    scrollbar-gutter: stable;
+}
+
 /* btn */
 .btnArea {
     text-align: center;
@@ -74,3 +79,5 @@
 // discount style
 
 // scrollBar style
+
+// modal style

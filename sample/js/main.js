@@ -1,3 +1,5 @@
+// modal vueComponent
+
 var content = new Vue({
     el: '#content',
     components: {
@@ -18,5 +20,6 @@ var content = new Vue({
     methods: {
         // header methods
         // goTop methods
+        // modal methods
     },
 });
