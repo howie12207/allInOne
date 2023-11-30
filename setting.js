@@ -19,7 +19,7 @@ export const hasAos = true;
 // todo 是否使用輪播
 export const hasSwiper = false;
 // 是否使用數字漸變效果
-export const hasCountTo = true;
+export const hasCountTo = false;
 // 是否使用自定義scrollBar
 export const useCustomScrollBar = false;
 // 是否使用discount組件

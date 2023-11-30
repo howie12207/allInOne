@@ -151,27 +151,21 @@ const run = async () => {
                 '<!-- 新增處body end -->'
             );
             indexHtml = indexHtml.replace(/<!-- goTop body -->/g, newBody);
-            // 替換goTop main.js
-            const mainJsFile = await readFileAsync(`components/goTop/main.js`, 'utf8');
-            const newMainJsData = copyData(
-                mainJsFile,
-                '// 新增處js data start',
-                '// 新增處js data end'
-            );
+            const newMainJsData = copyData(htmlFile, '// 新增處data start', '// 新增處data end');
             const newMainJsMounted = copyData(
-                mainJsFile,
-                '// 新增處js mounted start',
-                '// 新增處js mounted end'
+                htmlFile,
+                '// 新增處mounted start',
+                '// 新增處mounted end'
             );
             const newMainJsBeforeDestroy = copyData(
-                mainJsFile,
-                '// 新增處js beforeDestroy start',
-                '// 新增處js beforeDestroy end'
+                htmlFile,
+                '// 新增處beforeDestroy start',
+                '// 新增處beforeDestroy end'
             );
             const newMainJsMethods = copyData(
-                mainJsFile,
-                '// 新增處js methods start',
-                '// 新增處js methods end'
+                htmlFile,
+                '// 新增處methods start',
+                '// 新增處methods end'
             );
             mainJs = mainJs
                 .replace(/\/\/ goTop data/g, newMainJsData)
@@ -180,7 +174,7 @@ const run = async () => {
                 .replace(/\/\/ goTop methods/g, newMainJsMethods);
         } else {
             styleScss = styleScss.replace(/\/\/ goTop style/g, '');
-            indexHtml = styleScss.replace(/<!-- goTop body -->/g, '');
+            indexHtml = indexHtml.replace(/<!-- goTop body -->/g, '');
             mainJs = mainJs
                 .replace(/\/\/ goTop data/g, '')
                 .replace(/\/\/ goTop mounted/g, '')
