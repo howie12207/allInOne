@@ -241,7 +241,7 @@ const run = async () => {
     // countTo
     async function countToHandle() {
         if (hasCountTo) {
-            const htmlFile = await readFileAsync(`js/countTo/index.html`, 'utf8');
+            const htmlFile = await readFileAsync(`components/countTo/index.html`, 'utf8');
             // 替換countTo script
             const newScript = copyData(
                 htmlFile,
