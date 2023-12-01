@@ -13,7 +13,7 @@ export const hasGoTopIcon = true;
 // footer
 export const footerType = true;
 // 側邊懸浮按鈕類型
-export const HasFloatRightBtn = true;
+export const floatBtnType = '2';
 // 是否使用aos
 export const hasAos = true;
 // todo 是否使用輪播

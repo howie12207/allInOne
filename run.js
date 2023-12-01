@@ -12,7 +12,7 @@ import {
     hasAos,
     hasCountTo,
     useCustomScrollBar,
-    HasFloatRightBtn,
+    floatBtnType,
     footerType,
     hasDiscount,
     hasModal,
@@ -52,8 +52,8 @@ const run = async () => {
     await footerHandle();
     // 替換goTop
     await goTopHandle();
-    // 加入floatRightBtn
-    await floatRightBtnHandle();
+    // 加入floatBtn
+    await floatBtnHandle();
     // 替換discount
     await discountHandle();
     // 替換countTo
@@ -62,8 +62,8 @@ const run = async () => {
     await aosHandle();
     // 替換scrollBar
     await scrollBarHandle();
-    // 加入floatRightBtn
-    await floatRightBtnHandle();
+    // 加入floatBtn
+    await floatBtnHandle();
     // 加入footer
     await footerHandle();
     // 替換modal
@@ -177,18 +177,51 @@ const run = async () => {
                 .replace(/\/\/ goTop methods/g, '');
         }
     }
-    // floatRightBtn
-    async function floatRightBtnHandle() {
-        if (!HasFloatRightBtn) return;
-        let htmlFile = await readFileAsync(`components/floatRightBtn/index.html`, 'utf8');
+    // floatBtn
+    async function floatBtnHandle() {
+        if (floatBtnType === '0') {
+            indexHtml = indexHtml.replace(/<!-- floatBtn body -->/g, '');
+            styleScss = styleScss.replace(/\/\/ floatBtn style/g, '');
+            return;
+        }
+
+        let htmlFile = await readFileAsync(`components/floatBtn/index.html`, 'utf8');
         // 新增style
         const newStyle = copyData(htmlFile, '/* 新增處style start */', '/* 新增處style end */');
-        styleScss = `${styleScss}
-        ${newStyle}`;
+        styleScss = styleScss.replace(/\/\/ floatBtn style/g, newStyle);
 
-        // 替換body
-        const newBody = copyData(htmlFile, '<!-- 新增處body start -->', '<!-- 新增處body end -->');
-        indexHtml = indexHtml.replace(/<!-- flaotRightBtn body -->/g, newBody);
+        let newBody = copyData(htmlFile, '<!-- 新增處body start -->', '<!-- 新增處body end -->');
+
+        if (floatBtnType === '1') {
+            const waitDelete = copyData(
+                newBody,
+                '<!-- 第二顆按鈕 start -->',
+                '<!-- 第三顆按鈕 end -->'
+            );
+            newBody = newBody
+                .replace(waitDelete, '')
+                .replace(/ three-btns/g, '')
+                .replace(/<!-- 第二顆按鈕 start -->/g, '')
+                .replace(/<!-- 第三顆按鈕 end -->/g, '');
+        } else if (floatBtnType === '2') {
+            const waitDelete = copyData(
+                newBody,
+                '<!-- 第二顆按鈕 end -->',
+                '<!-- 第三顆按鈕 end -->'
+            );
+            newBody = newBody
+                .replace(waitDelete, '')
+                .replace(/ three-btns/g, ' two-btns')
+                .replace(/<!-- 第二顆按鈕 end -->/g, '')
+                .replace(/<!-- 第三顆按鈕 end -->/g, '');
+        } else {
+            newBody = newBody
+                .replace(/<!-- 第二顆按鈕 start -->/g, '')
+                .replace(/<!-- 第二顆按鈕 end -->/g, '')
+                .replace(/<!-- 第三顆按鈕 start -->/g, '')
+                .replace(/<!-- 第三顆按鈕 end -->/g, '');
+        }
+        indexHtml = indexHtml.replace(/<!-- floatBtn body -->/g, newBody);
     }
     // discount
     async function discountHandle() {
