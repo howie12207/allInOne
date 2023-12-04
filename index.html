@@ -32,11 +32,21 @@
         />
 
         <link rel="stylesheet" href="css/normalize.css" />
-        <!-- <link rel="stylesheet" href="css/style.css" /> -->
 
         <style>
             .async-hide {
                 opacity: 0 !important;
+            }
+            .block {
+                margin: 24px 16px;
+            }
+            .title {
+                font-weight: 700;
+                font-size: 24px;
+            }
+            a {
+                display: block;
+                margin: 8px 0;
             }
         </style>
 
@@ -44,21 +54,10 @@
     </head>
     <body>
         <div id="content">
-            <div>
-                <label for="title">標題</label>
-                <input type="text" v-model="title" />
+            <div v-for="list of menuList" class="block">
+                <div class="title">{{ list.title }}</div>
+                <a v-for="item of list.content" :href="item.link">{{ item.text }}</a>
             </div>
-
-            <div>
-                <label for="description">描述</label>
-                <textarea v-model="description"></textarea>
-            </div>
-
-            <div>
-                <label for="header">Header</label>
-            </div>
-
-            <button type="button" @click="submit">送出</button>
         </div>
 
         <script>
@@ -66,8 +65,93 @@
                 el: '#content',
                 data() {
                     return {
-                        title: '',
-                        description: '',
+                        menuList: [
+                            {
+                                title: 'header',
+                                content: [
+                                    {
+                                        link: './components/header/index1.html',
+                                        text: '一般header',
+                                    },
+                                    {
+                                        link: './components/header/index2.html',
+                                        text: 'header帶menu',
+                                    },
+                                ],
+                            },
+                            {
+                                title: 'footer',
+                                content: [
+                                    {
+                                        link: './components/footer/index.html',
+                                        text: 'footer',
+                                    },
+                                ],
+                            },
+                            {
+                                title: '滑動至頂Icon',
+                                content: [
+                                    {
+                                        link: './components/goTop/index.html',
+                                        text: '滑動至頂Icon',
+                                    },
+                                ],
+                            },
+                            {
+                                title: '右側(下方)懸浮按鈕',
+                                content: [
+                                    {
+                                        link: './components/floatBtn/index.html',
+                                        text: '右側(下方)懸浮按鈕',
+                                    },
+                                ],
+                            },
+                            {
+                                title: '右側(下方)懸浮動畫按鈕',
+                                content: [
+                                    {
+                                        link: './components/floatAnimateBtn/index.html',
+                                        text: '右側(下方)懸浮動畫按鈕',
+                                    },
+                                ],
+                            },
+                            {
+                                title: '優惠組件',
+                                content: [
+                                    {
+                                        link: './components/discount/index.html',
+                                        text: '優惠組件',
+                                    },
+                                ],
+                            },
+                            {
+                                title: '彈窗組件',
+                                content: [
+                                    {
+                                        link: './components/modal/index.html',
+                                        text: '彈窗組件',
+                                    },
+                                ],
+                            },
+                            {
+                                title: 'Banner',
+                                content: [
+                                    {
+                                        link: './components/banner/index.html',
+                                        text: 'Banner',
+                                    },
+                                ],
+                            },
+                            {
+                                title: '數字漸變組件',
+                                content: [
+                                    {
+                                        link: './components/countTo/index.html',
+                                        text: '數字漸變組件',
+                                    },
+                                ],
+                            },
+                        ],
                     };
                 },
                 methods: {
