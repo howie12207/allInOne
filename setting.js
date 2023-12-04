@@ -12,7 +12,7 @@ export const hasBanner = false;
 export const hasGoTopIcon = true;
 // footer
 export const footerType = true;
-// 側邊懸浮按鈕類型
+// 側邊懸浮按鈕類型 0:無 1:一顆按鈕 2:二顆按鈕 3:三顆按鈕
 export const floatBtnType = '2';
 // 是否使用aos
 export const hasAos = true;
@@ -26,3 +26,5 @@ export const useCustomScrollBar = false;
 export const hasDiscount = false;
 // 是否使用彈窗
 export const hasModal = false;
+// 是否使用懸浮動畫按鈕
+export const hasFloatAnimateBtn = false;

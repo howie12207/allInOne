@@ -16,6 +16,7 @@ import {
     footerType,
     hasDiscount,
     hasModal,
+    hasFloatAnimateBtn,
 } from './setting.js';
 
 const readFileAsync = util.promisify(fs.readFile);
@@ -38,6 +39,7 @@ const run = async () => {
     if (!fs.existsSync(fileName)) fs.mkdirSync(fileName);
     if (!fs.existsSync(`${fileName}/css`)) fs.mkdirSync(`${fileName}/css`);
     if (!fs.existsSync(`${fileName}/js`)) fs.mkdirSync(`${fileName}/js`);
+    if (!fs.existsSync(`${fileName}/images`)) fs.mkdirSync(`${fileName}/images`);
 
     await copyFileAsync('sample/css/normalize.css', `${fileName}/css/normalize.css`);
 
@@ -68,6 +70,8 @@ const run = async () => {
     await footerHandle();
     // 替換modal
     await modalHandle();
+    // 替換floatAnimateBtn
+    await floatAnimateBtnHandle();
 
     await writeFileAsync(`./${fileName}/index.html`, indexHtml, 'utf8');
     await writeFileAsync(`./${fileName}/css/style.scss`, styleScss, 'utf8');
@@ -348,6 +352,22 @@ const run = async () => {
             indexHtml = indexHtml.replace(/<!-- modal body -->/g, '');
             mainJs = mainJs.replace('// modal vueComponent', '').replace(/\/\/ modal methods/g, '');
         }
+    }
+    // floatAnimateBtn
+    async function floatAnimateBtnHandle() {
+        if (!hasFloatAnimateBtn) {
+            indexHtml = indexHtml.replace(/<!-- floatAnimateBtn body -->/g, '');
+            styleScss = styleScss.replace(/\/\/ floatAnimateBtn style/g, '');
+            return;
+        }
+
+        let htmlFile = await readFileAsync(`components/floatAnimateBtn/index.html`, 'utf8');
+
+        const newStyle = copyData(htmlFile, '/* 新增處style start */', '/* 新增處style end */');
+        styleScss = styleScss.replace(/\/\/ floatAnimateBtn style/g, newStyle);
+
+        let newBody = copyData(htmlFile, '<!-- 新增處body start -->', '<!-- 新增處body end -->');
+        indexHtml = indexHtml.replace(/<!-- floatAnimateBtn body -->/g, newBody);
     }
 };
 run();

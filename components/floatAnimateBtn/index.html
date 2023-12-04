@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>懸浮動畫按鈕</title>
+        <link rel="stylesheet" href="/css/normalize.css" />
+        <style>
+            /* 新增處style start */
+            .float-animate-btn {
+                position: fixed;
+                bottom: 72px;
+                left: 48px;
+                z-index: 9;
+                animation: float-animate-btn 0.7s infinite alternate-reverse;
+            }
+            .float-animate-btn .float-animate-btn-link {
+                text-decoration: none;
+                display: inline-block;
+            }
+            @keyframes float-animate-btn {
+                0% {
+                    transform: translateY(-16px);
+                }
+                100% {
+                    transform: translateY(16px);
+                }
+            }
+            @media (min-width: 768px) {
+                .float-animate-btn {
+                    top: 50%;
+                    bottom: initial;
+                    right: 48px;
+                    left: initial;
+                    transform: translateY(-50%);
+                }
+                @keyframes float-animate-btn {
+                    0% {
+                        transform: translateY(calc(-50% - 16px));
+                    }
+                    100% {
+                        transform: translateY(calc(-50% + 16px));
+                    }
+                }
+            }
+            /* 新增處style end */
+        </style>
+    </head>
+    <body>
+        <!-- 新增處body start -->
+        <div class="float-animate-btn">
+            <a class="float-animate-btn-link" href="https://etrade.franklin.com.tw/ec/login">
+                <img src="https://fakeimg.pl/88x88/" alt="立即申購" />
+            </a>
+        </div>
+        <!-- 新增處body end -->
+    </body>
+</html>
