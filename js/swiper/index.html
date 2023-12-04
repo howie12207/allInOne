@@ -8,72 +8,197 @@
         />
         <title>輪播效果</title>
 
+        <link rel="stylesheet" href="/css/normalize.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+
         <style>
-            .swiper-tab-bar {
-                overflow-x: auto;
+            .swiper-tab-group {
+                width: 100%;
+                margin: 0 auto;
+                padding-top: 32px;
                 display: flex;
-                gap: 16px;
+                justify-content: center;
             }
             .swiper-tab {
-                flex-shrink: 0;
-                font-size: 20px;
-                color: #977d77;
-                background-color: #eee;
-                padding: 8px 32px;
-                border-radius: 20px;
+                outline: none;
+                display: inline-block;
+                vertical-align: top;
+                font-size: 25px;
+                color: #7b7b7b;
+                border: solid 2px #c4c4c4;
+                box-sizing: border-box;
+                border-radius: 200px;
+                padding: 8px 28px;
+                margin: 0 16px;
                 cursor: pointer;
+                position: relative;
+                background-color: #fff;
+                font-weight: bold;
             }
-            .swiper-tab.activate-tab {
-                color: #2b1812;
-                background-color: #c7f7ff;
-                background-image: linear-gradient(75deg, #c7f7ff 0%, #e7d4cf 100%);
+
+            .swiper-tab.active {
+                color: #005598;
+                background: #d6edff;
+                border-color: #d6edff;
+            }
+            .swiper-tab.active:before {
+                content: '';
+                position: absolute;
+                left: 50%;
+                bottom: -18px;
+                transform: translateX(-50%);
+                border-top: solid 18px #d6edff;
+                border-left: solid 10px transparent;
+                border-right: solid 10px transparent;
+            }
+            .swiper-content-wrapper {
+                max-width: 1000px;
+                margin: 0 auto;
+            }
+            .main-swiper {
+                width: 100%;
+                height: 200px;
+                position: relative;
+                overflow: hidden;
+            }
+            .swiper-slide {
+                width: 100%;
+                height: 100%;
+                background-color: #ccc;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .swiper-button-prev,
+            .swiper-button-next {
+                font-size: 0px;
+                position: absolute;
+                padding: 0px;
+                border-radius: 100%;
+                width: 42px;
+                height: 42px;
+                text-align: center;
+                color: #7b7b7b;
+                transition: 0.3s ease all;
+                z-index: 1;
+                background: none;
+            }
+            .swiper-button-prev::after,
+            .swiper-button-next::after {
+                display: none;
+            }
+            .swiper-button-prev:before {
+                content: '\f137';
+            }
+            .swiper-button-next:before {
+                content: '\f138';
+            }
+            .swiper-button-prev::before,
+            .swiper-button-next::before {
+                font-size: 42px;
+                line-height: 1;
+                border-radius: 100%;
+                font-family: 'Font Awesome 5 Free';
+                font-weight: 900;
+                background-color: #fff;
+            }
+            .swiper-pagination-bullet {
+                width: 13px;
+                height: 13px;
+                border-radius: 50px;
+            }
+            .swiper-pagination-bullet-active {
+                background: #005598;
+                width: 25px;
+            }
+            .swiper-button-next:hover,
+            .swiper-button-prev:hover {
+                color: #007eff;
+            }
+            .swiper-subtitle {
+                text-align: center;
+                color: #3a3a3a;
+                font-size: 18px;
+                line-height: 1.75;
+            }
+
+            @media screen and (max-width: 991px) {
+                .swiper-tab {
+                    font-size: 18px;
+                    margin: 0 5px;
+                    padding: 0 8px;
+                    line-height: 1.75;
+                }
+                .swiper-subtitle {
+                    font-size: 16px;
+                }
+            }
+
+            @media screen and (max-width: 768px) {
+                .swiper-button-prev::before,
+                .swiper-button-next::before {
+                    font-size: 26px;
+                }
             }
         </style>
-
-        <!-- 需使用Vue -->
+        <script src="https://kit.fontawesome.com/0389e2f534.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
         <script src="https://event.franklin.com.tw/commonResources/js/vue-v2.min.js"></script>
-
-        <!-- 新增處 -->
-        <link
-            href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.7/css/swiper.min.css"
-            rel="stylesheet"
-        />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.7/js/swiper.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/vue-awesome-swiper@3.1.2/dist/vue-awesome-swiper.js"></script>
-        <script type="text/javascript">
-            Vue.use(window.VueAwesomeSwiper);
-        </script>
     </head>
     <body>
-        <div id="content">
-            <div>
-                <div class="swiper-tab-bar">
-                    <span
-                        @click="changeSwiperTab1(1)"
-                        :class="['swiper-tab', swiperTab1 === 1 && 'activate-tab']"
-                        >智能理財</span
-                    >
-                    <span
-                        @click="changeSwiperTab1(2)"
-                        :class="['swiper-tab', swiperTab1 === 2 && 'activate-tab']"
-                        >開戶優惠</span
-                    >
-                    <span
-                        @click="changeSwiperTab1(3)"
-                        :class="['swiper-tab', swiperTab1 === 3 && 'activate-tab']"
-                        >獨享禮遇</span
-                    >
+        <div id="swiper-content">
+            <div class="swiper-tab-group">
+                <button
+                    class="swiper-tab"
+                    :class="activeTab === 0 && 'active'"
+                    @click="handleTabClick(0)"
+                >
+                    核心收益
+                </button>
+                <button
+                    class="swiper-tab"
+                    :class="activeTab === 1 && 'active'"
+                    @click="handleTabClick(1)"
+                >
+                    tab 2
+                </button>
+
+                <button
+                    class="swiper-tab"
+                    :class="activeTab === 2 && 'active'"
+                    @click="handleTabClick(2)"
+                >
+                    tab 3
+                </button>
+            </div>
+            <div class="swiper-content-wrapper">
+                <p v-show="activeTab === 0" class="swiper-subtitle">This is subtitle of Tab</p>
+                <p v-show="activeTab === 1" class="swiper-subtitle">This is subtitle of Tab 2.</p>
+                <p v-show="activeTab === 2" class="swiper-subtitle">This is subtitle of Tab 3.</p>
+                <div ref="mainSwiper" class="main-swiper">
+                    <div v-if="activeTab === 0" class="swiper-wrapper">
+                        <div class="swiper-slide">1-1</div>
+                        <div class="swiper-slide">1-2</div>
+                        <div class="swiper-slide">1-3</div>
+                    </div>
+                    <div v-if="activeTab === 1" class="swiper-wrapper">
+                        <div class="swiper-slide">2-1</div>
+                        <div class="swiper-slide">2-2</div>
+                        <div class="swiper-slide">2-3</div>
+                    </div>
+                    <div v-if="activeTab === 2" class="swiper-wrapper">
+                        <div class="swiper-slide">3-1</div>
+                        <div class="swiper-slide">3-2</div>
+                        <div class="swiper-slide">3-3</div>
+                    </div>
+                    <!-- 可選：頁籤 -->
+                    <div class="swiper-pagination"></div>
+                    <!-- 可選：前後頁控制 -->
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
                 </div>
             </div>
-
-            <swiper ref="swiper1" :options="swiperOptions1" class="swiper-container1">
-                <swiper-slide>content1</swiper-slide>
-                <swiper-slide>content2</swiper-slide>
-                <swiper-slide>content3</swiper-slide>
-            </swiper>
         </div>
-
-        <!-- 新增處 -->
         <script src="./main.js"></script>
     </body>
 </html>
