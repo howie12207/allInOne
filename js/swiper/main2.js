@@ -18,6 +18,7 @@ new Vue({
             });
             this.$refs.mainSwiper.swiper.on('slideChange', this.handleSlideChange);
             this.$refs.mainSwiper.swiper.on('resize', this.handleWidthResize);
+            this.initIntersectionObserver();
         });
     },
     methods: {
@@ -34,9 +35,7 @@ new Vue({
 
             new Swiper('.tab-swiper', {
                 loop: this.isFromMobile,
-                autoplay: {
-                    delay: 2000, // 自動播放間隔
-                },
+                autoplay: false,
                 speed: 600,
                 slideToClickedSlide: true,
                 pagination: {
@@ -46,7 +45,6 @@ new Vue({
                 ...paramsByWidth,
             });
             this.$refs.tabSwiper.swiper.on('slideChange', this.handleTabSlideChange);
-            this.handleAutoplay();
         },
         handleTabClick(index) {
             this.activeTab = index;
@@ -97,6 +95,24 @@ new Vue({
                 clearInterval(this.autoplayInstance);
                 this.autoplayInstance = null;
             }
+        },
+        initIntersectionObserver() {
+            const observer = new IntersectionObserver(
+                entries => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            this.$refs.tabSwiper.swiper.autoplay.start();
+                            this.handleAutoplay();
+                        }
+                    });
+                },
+                {
+                    root: null,
+                    threshold: 0.7,
+                }
+            );
+            const swiperEl = document.querySelector('.swiper-with-tab');
+            observer.observe(swiperEl);
         },
     },
     beforeDestroy() {
