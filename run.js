@@ -15,6 +15,7 @@ import {
     floatBtnType,
     footerType,
     hasDiscount,
+    hasVideoList,
     hasModal,
     hasFloatAnimateBtn,
 } from './setting.js';
@@ -29,6 +30,7 @@ const run = async () => {
     if (description === '') return console.error('請填描述');
     const nameLimit = ['components', 'css', 'js', 'sample'];
     if (nameLimit.includes(fileName.toLowerCase().trim())) return console.log('請更改專案名稱');
+    if (hasVideoList && !hasModal) return console.error('使用影音專區需搭配彈窗，請將彈窗開啟');
 
     clean(fileName);
 
@@ -58,6 +60,8 @@ const run = async () => {
     await floatBtnHandle();
     // 替換discount
     await discountHandle();
+    // 替換discount
+    await videoListHandle();
     // 替換countTo
     await countToHandle();
     // 替換aos
@@ -262,6 +266,38 @@ const run = async () => {
                 .replace(/<!-- discount body -->/g, '');
             styleScss = styleScss.replace(/\/\/ discount style/g, '');
             mainJs = mainJs.replace(/\/\/ discount components/g, '');
+        }
+    }
+    // videoList
+    async function videoListHandle() {
+        if (hasVideoList) {
+            const htmlFile = await readFileAsync(`components/videoList/index.html`, 'utf8');
+
+            const newStyle = copyData(htmlFile, '/* 新增處style start */', '/* 新增處style end */');
+            styleScss = styleScss.replace(/\/\/ videoList style/g, newStyle);
+
+            const newBody = copyData(
+                htmlFile,
+                '<!-- 新增處body start -->',
+                '<!-- 新增處body end -->'
+            );
+            indexHtml = indexHtml.replace(/<!-- videoList body -->/g, newBody);
+
+            const newMounted = copyData(htmlFile, '// 新增處mounted start', '// 新增處mounted end');
+            const newData = copyData(htmlFile, '// 新增處data start', '// 新增處data end');
+            const newMethods = copyData(htmlFile, '// 新增處methods start', '// 新增處methods end');
+            mainJs = mainJs
+                .replace(/\/\/ videoList mounted/g, newMounted)
+                .replace(/\/\/ videoList data/g, newData)
+                .replace(/\/\/ videoList methods/g, newMethods);
+            await copyFileAsync('components/videoList/video.json', `${fileName}/video.json`);
+        } else {
+            indexHtml = indexHtml.replace(/<!-- videoList body -->/g, '');
+            styleScss = styleScss.replace(/\/\/ videoList style/g, '');
+            mainJs = mainJs
+                .replace(/\/\/ videoList mounted/g, '')
+                .replace(/\/\/ videoList data/g, '')
+                .replace(/\/\/ videoList methods/g, '');
         }
     }
     // countTo

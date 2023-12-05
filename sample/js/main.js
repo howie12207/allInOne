@@ -9,10 +9,12 @@ var content = new Vue({
         return {
             // header data
             // goTop data
+            // videoList data
         };
     },
     mounted() {
         // goTop mounted
+        // videoList mounted
     },
     beforeDestroy() {
         // goTop beforeDestroy
@@ -21,5 +23,6 @@ var content = new Vue({
         // header methods
         // goTop methods
         // modal methods
+        // videoList methods
     },
 });

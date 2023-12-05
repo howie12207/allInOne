@@ -24,7 +24,9 @@ export const hasCountTo = false;
 export const useCustomScrollBar = false;
 // 是否使用discount組件
 export const hasDiscount = false;
+// 是否使用影片專區
+export const hasVideoList = false;
 // 是否使用彈窗
-export const hasModal = false;
+export const hasModal = true;
 // 是否使用懸浮動畫按鈕
 export const hasFloatAnimateBtn = false;
