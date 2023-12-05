@@ -3,57 +3,61 @@ new Vue({
     data() {
         return {
             activeTab: 0,
+            isFromMobile: false,
+            autoplayInstance: null,
         };
     },
-    // watch: {
-    //     activeTab(newVal) {
-    //         this.$refs.tabSwiper.swiper.slideTo(newVal);
-    //         this.$refs.mainSwiper.swiper.slideTo(newVal);
-    //     },
-    // },
     mounted() {
+        this.isFromMobile = window.innerWidth < 768;
         this.$nextTick(() => {
+            this.initTabSwiper();
             new Swiper('.main-swiper', {
                 perPageView: 1,
-                speed: 500,
+                speed: 600,
                 autoplay: false,
             });
+            this.$refs.mainSwiper.swiper.on('slideChange', this.handleSlideChange);
+            this.$refs.mainSwiper.swiper.on('resize', this.handleWidthResize);
+        });
+    },
+    methods: {
+        initTabSwiper() {
+            const paramsByWidth = this.isFromMobile
+                ? {
+                      slidesPerView: 2,
+                      spaceBetween: 20,
+                  }
+                : {
+                      slidesPerView: 4,
+                      spaceBetween: 20,
+                  };
+
             new Swiper('.tab-swiper', {
-                slidesPerView: 2,
-                loop: true,
-                autoplay: true,
-                speed: 500,
+                loop: this.isFromMobile,
+                autoplay: {
+                    delay: 2000, // 自動播放間隔
+                },
+                speed: 600,
                 slideToClickedSlide: true,
                 pagination: {
                     el: '.swiper-pagination',
                     clickable: true,
                 },
-                // breakpoints: {
-                //     // when window width is >= 320px
-                //     320: {
-                //         slidesPerView: 2,
-                //         spaceBetween: 20,
-                //     },
-                //     // when window width is >= 640px
-                //     768: {
-                //         slidesPerView: 4,
-                //         spaceBetween: 20,
-                //     },
-                // },
+                ...paramsByWidth,
             });
             this.$refs.tabSwiper.swiper.on('slideChange', this.handleTabSlideChange);
-            this.$refs.mainSwiper.swiper.on('slideChange', this.handleSlideChange);
-        });
-    },
-    methods: {
+            this.handleAutoplay();
+        },
         handleTabClick(index) {
-            console.log(index);
             this.activeTab = index;
-            // this.$refs.tabSwiper.swiper.slideTo(index);
+            this.$refs.mainSwiper.swiper.slideTo(index);
+            this.clearAutoplayInstance();
+            this.handleAutoplay();
         },
         handleTabSlideChange() {
             this.$nextTick(() => {
                 this.activeTab = this.$refs.tabSwiper.swiper.realIndex;
+                this.$refs.mainSwiper.swiper.slideTo(this.activeTab);
             });
         },
         handleSlideChange() {
@@ -61,5 +65,41 @@ new Vue({
                 this.activeTab = this.$refs.mainSwiper.swiper.realIndex;
             });
         },
+        handleWidthResize() {
+            const resetTabSwiper = () => {
+                this.$refs.tabSwiper.swiper.destroy();
+                this.initTabSwiper();
+            };
+            if (window.innerWidth < 768 && !this.isFromMobile) {
+                this.isFromMobile = true;
+                resetTabSwiper();
+                this.clearAutoplayInstance();
+            } else if (window.innerWidth > 767 && this.isFromMobile) {
+                this.isFromMobile = false;
+                resetTabSwiper();
+            }
+        },
+        handleAutoplay() {
+            if (this.isFromMobile) return;
+            this.clearAutoplayInstance();
+            this.autoplayInstance = setInterval(() => {
+                let nextIndex = this.activeTab + 1;
+                const totalSlides = this.$refs.tabSwiper.swiper.slides.length;
+                if (nextIndex >= totalSlides) {
+                    nextIndex = 0;
+                }
+                this.$refs.tabSwiper.swiper.slideTo(nextIndex);
+                this.handleTabClick(nextIndex);
+            }, 2500);
+        },
+        clearAutoplayInstance() {
+            if (this.autoplayInstance) {
+                clearInterval(this.autoplayInstance);
+                this.autoplayInstance = null;
+            }
+        },
+    },
+    beforeDestroy() {
+        this.clearAutoplayInstance();
     },
 });
