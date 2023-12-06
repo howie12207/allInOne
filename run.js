@@ -18,6 +18,7 @@ import {
     hasVideoList,
     hasModal,
     hasFloatAnimateBtn,
+    useSwiper,
 } from './setting.js';
 
 const readFileAsync = util.promisify(fs.readFile);
@@ -52,11 +53,11 @@ const run = async () => {
     await headerHandle();
     // 替換banner
     await bannerHandle();
-    // 加入footer
+    // 新增footer
     await footerHandle();
     // 替換goTop
     await goTopHandle();
-    // 加入floatBtn
+    // 新增floatBtn
     await floatBtnHandle();
     // 替換discount
     await discountHandle();
@@ -68,14 +69,16 @@ const run = async () => {
     await aosHandle();
     // 替換scrollBar
     await scrollBarHandle();
-    // 加入floatBtn
+    // 新增floatBtn
     await floatBtnHandle();
-    // 加入footer
+    // 新增footer
     await footerHandle();
     // 替換modal
     await modalHandle();
     // 替換floatAnimateBtn
     await floatAnimateBtnHandle();
+    // 新增swiper
+    await swiperHandle();
 
     await writeFileAsync(`./${fileName}/index.html`, indexHtml, 'utf8');
     await writeFileAsync(`./${fileName}/css/style.scss`, styleScss, 'utf8');
@@ -404,6 +407,52 @@ const run = async () => {
 
         let newBody = copyData(htmlFile, '<!-- 新增處body start -->', '<!-- 新增處body end -->');
         indexHtml = indexHtml.replace(/<!-- floatAnimateBtn body -->/g, newBody);
+    }
+    async function swiperHandle() {
+        if (useSwiper === '0') return;
+        const htmlFile = await readFileAsync(`js/swiper/index${useSwiper}.html`, 'utf8');
+
+        // 新增swiper style
+        const newStyle = copyData(htmlFile, '/* 新增處style start */', '/* 新增處style end */');
+        styleScss = styleScss.replace(/\/\/ swiper style/g, newStyle);
+
+        // 新增swiper body
+        const newBody = copyData(htmlFile, '<!-- 新增處body start -->', '<!-- 新增處body end -->');
+
+        // 新增swiper link
+        const newLink = copyData(htmlFile, '<!-- 新增處link start -->', '<!-- 新增處link end -->');
+        // 新增swiper script
+        const newScript = copyData(
+            htmlFile,
+            '<!-- 新增處script start -->',
+            '<!-- 新增處script end -->'
+        );
+        indexHtml = indexHtml
+            .replace(/<!-- swiper link -->/g, newLink)
+            .replace(/<!-- swiper script -->/g, newScript)
+            .replace(/<!-- swiper body -->/g, newBody);
+
+        const newMainJsData = copyData(htmlFile, '// 新增處data start', '// 新增處data end');
+        const newMainJsMounted = copyData(
+            htmlFile,
+            '// 新增處mounted start',
+            '// 新增處mounted end'
+        );
+        const newMainJsBeforeDestroy = copyData(
+            htmlFile,
+            '// 新增處beforeDestroy start',
+            '// 新增處beforeDestroy end'
+        );
+        const newMainJsMethods = copyData(
+            htmlFile,
+            '// 新增處methods start',
+            '// 新增處methods end'
+        );
+        mainJs = mainJs
+            .replace(/\/\/ swiper data/g, newMainJsData)
+            .replace(/\/\/ swiper mounted/g, newMainJsMounted)
+            .replace(/\/\/ swiper beforeDestroy/g, newMainJsBeforeDestroy)
+            .replace(/\/\/ swiper methods/g, newMainJsMethods);
     }
 };
 run();

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+        <meta name="theme-color" content="#006bb4" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta property="og:type" content="website" />
+        <meta property="fb:app_id" content="1060402337367331" />
+
+        <title>2</title>
+        <meta property="og:title" content="2" />
+        <meta name="twitter:title" content="2" />
+
+        <meta name="description" content="3" />
+        <meta property="og:description" content="3" />
+        <meta name="twitter:description" content="3" />
+
+        <link
+            rel="shortcut icon"
+            href="https://event.franklin.com.tw/commonResources/images/favicon.ico"
+        />
+        <link
+            rel="apple-touch-icon"
+            sizes="192x192"
+            href="https://event.franklin.com.tw/commonResources/images/192x192.png"
+        />
+
+        <link rel="stylesheet" href="css/normalize.css" />
+        <link rel="stylesheet" href="css/style.css" />
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+        />
+
+        <style>
+            .async-hide {
+                opacity: 0 !important;
+            }
+        </style>
+
+        <script src="https://event.franklin.com.tw/commonResources/js/scrollTo.min.js"></script>
+        <script src="https://kit.fontawesome.com/0389e2f534.js" crossorigin="anonymous"></script>
+        <script src="https://event.franklin.com.tw/commonResources/js/vue-v2.min.js"></script>
+        
+        
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    </head>
+    <body>
+        <div id="content" v-cloak>
+            <sice-provider>
+                <header class="header-container container">
+            <a
+                href="https://www.franklin.com.tw"
+                title="富蘭克林‧國民的基金 官方網站"
+                target="_blank"
+                rel="noreferrer noopener"
+                class="header-main"
+            >
+                <picture
+                    ><source
+                        media="(max-width: 1024px)"
+                        srcset="
+                            https://event.franklin.com.tw/commonResources/images/logo2019.svg
+                        " />
+                    <img
+                        src="https://event.franklin.com.tw/commonResources/images/header-logo.png"
+                        alt="富蘭克林‧國民的基金"
+                        class="logo-img"
+                /></picture>
+                <h1 class="header-title">富蘭克林‧國民的基金</h1>
+            </a>
+        </header>
+
+                
+
+                
+
+                
+
+                
+
+                <button @click="switchModal('modal-1')">
+                開啟彈窗(此按鈕為測試使用，用不到可刪除)
+            </button>
+            <modal ref="modal-1"
+                >彈窗內容<button @click="switchModal('modal-1')">關閉</button></modal
+            >
+
+                <div class="swiper-with-tab container">
+            <div id="swiper-content-3" class="swiper-content">
+                <div ref="tabSwiper" class="tab-swiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide tab-swiper-slide" @click="handleTabClick(0)">
+                            <button class="swiper-tab" :class="activeTab === 0 && 'active'">
+                                tab 1
+                            </button>
+                        </div>
+                        <div class="swiper-slide tab-swiper-slide" @click="handleTabClick(1)">
+                            <button class="swiper-tab" :class="activeTab === 1 && 'active'">
+                                tab 2
+                            </button>
+                        </div>
+                        <div class="swiper-slide tab-swiper-slide" @click="handleTabClick(2)">
+                            <button class="swiper-tab" :class="activeTab === 2 && 'active'">
+                                tab 3
+                            </button>
+                        </div>
+                        <div class="swiper-slide tab-swiper-slide" @click="handleTabClick(3)">
+                            <button class="swiper-tab" :class="activeTab === 3 && 'active'">
+                                tab 4
+                            </button>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+                <div ref="mainSwiper" class="main-swiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">content 1</div>
+                        <div class="swiper-slide">content 2</div>
+                        <div class="swiper-slide">content 3</div>
+                        <div class="swiper-slide">content 4</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+                <footer class="footer">
+            <div class="container">
+                <div class="footer-header">
+                    <div class="footer-header-left">
+                        <div class="footer-header-left-logo">
+                            <a
+                                href="http://www.franklin.com.tw/"
+                                target="_blank"
+                                title="富蘭克林證券投顧"
+                            >
+                                <img
+                                    src="https://event.franklin.com.tw/commonResources/images/footer-logo.png"
+                                    alt="富蘭克林證券投顧"
+                                    width="169"
+                                    height="45"
+                                />
+                            </a>
+                        </div>
+                        <div class="footer-header-left-company-name">
+                            富蘭克林證券投資顧問(股)公司
+                        </div>
+                        <div class="footer-header-left-id-code">
+                            101年金管投顧新字第025號 | 富蘭克林證券投顧獨立經營管理
+                        </div>
+                    </div>
+                    <div class="footer-header-right">
+                        <ul class="footer-header-right-social-media">
+                            <li>
+                                <a
+                                    href="https://www.facebook.com/franklin.taiwan/"
+                                    target="_blank"
+                                    title="粉絲團"
+                                >
+                                    <i class="fab fa-facebook-square"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href="http://line.naver.jp/ti/p/%40franklin"
+                                    target="_blank"
+                                    title="Line"
+                                >
+                                    <i class="fab fa-line"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href="https://www.youtube.com/user/franklin0800885888"
+                                    target="_blank"
+                                    title="youtube"
+                                >
+                                    <i class="fab fa-youtube"></i>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="footer-header-right-phone">
+                            <div class="footer-header-right-phone-tit">國民理財專線：</div>
+                            <div class="footer-header-right-phone-phone">
+                                <a href="tel:0800-885-888" title="國民理財專線"> 0800-885-888 </a>
+                            </div>
+                        </div>
+                        <div class="footer-header-right-address">
+                            106台北市大安區忠孝東路四段87號8樓
+                        </div>
+                        <div class="footer-header-right-tel">
+                            電話: (02)2781-0088　傳真: (02)2781-7788
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-warning">
+                    <ul>
+                        <li>
+                            本境外基金經金融監督管理委員會核准或申報生效在國內募集及銷售，惟不表示絕無風險。基金經理公司以往之經理績效不保證基金之最低投資收益；基金經理公司除盡善良管理人之注意義務外，不負責本基金之盈虧，亦不保證最低之收益，投資人申購前應詳閱基金公開說明書。
+                        </li>
+                        <li>
+                            本公司所提供之資訊，僅供接收人之參考用途。本公司當盡力提供正確之資訊，所載資料均來自或本諸我們相信可靠之來源，但對其完整性、即時性和正確性不做任何擔保，如有錯漏或疏忽，本公司或關係企業與其任何董事或受僱人，並不負任何法律責任。任何人因信賴此等資料而做出或改變投資決策，須自行承擔結果。本網頁所載資料或任何部份均不可以進行抄錄、翻印或另作派發。
+                        </li>
+                        <li>
+                            本文提及之經濟走勢預測，不必然代表基金之績效，本基金投資風險請詳閱基金公開說明書。投資基金所應承擔之相關風險及應負擔之費用(含分銷費用)已揭露於基金公開說明書及投資人須知中，投資人可至境外基金資訊觀測站(<a
+                                href="https://www.fundclear.com.tw/"
+                                target="_blank"
+                                title="基金資訊觀測站"
+                                >https://www.fundclear.com.tw/</a
+                            >)下載，或逕向本公司網站(<a
+                                href="https://www.Franklin.com.tw"
+                                target="_blank"
+                                title="富蘭克林‧國民的基金 官方網站"
+                                >https://www.franklin.com.tw/</a
+                            >)查閱。
+                        </li>
+                        <li>
+                            <b class="focus"
+                                >由於非投資等級債券之信用評等未達投資等級或未經信用評等，且對利率變動的敏感度甚高，故本基金可能會因利率上升、市場流動性下降，或債券發行機構違約不支付本金、利息或破產而蒙受虧損。本基金不適合無法承擔相關風險之投資人。基金經理公司以往之經理績效不保證基金之最低投資收益；基金經理公司除盡善良管理人之注意義務外，不負責本基金之盈虧，亦不保證最低之收益，投資人申購前應詳閱基金公開說明書。本基金較適合投資屬性中風險承受度較高之投資人，投資人投資以非投資等級債券為訴求之基金不宜占其投資組合過高之比重，投資人應審慎評估。</b
+                            >
+                        </li>
+                        <li>
+                            由於新興市場基金之主要投資風險除包含一般股票型基金之投資組合跌價與匯率風險外，與成熟市場相比須承受較高之政治與金融管理風險，而因市值及制度性因素，流動性風險也相對較高，新興市場投資組合波動性普遍高於成熟市場。基金投資均涉及風險且不負任何抵抗投資虧損之擔保。投資風險之詳細資料請參閱基金公開說明書。
+                        </li>
+                        <li>
+                            <b class="focus"
+                                >境外基金投資大陸地區證券市場之有價證券以掛牌上市有價證券為限，且投資前述有價證券總金額不得超過本基金淨資產價值之20%，另投資香港地區紅籌股及H股並無限制。本基金並非完全投資於大陸地區之有價證券，投資人仍須留意中國市場特定政治、經濟與市場之投資風險。</b
+                            >
+                        </li>
+                        <li>
+                            基金的配息可能由基金的收益或本金中支付。部分基金進行配息前未先扣除應負擔之費用。任何涉及由本金支出的部份，可能導致原始投資金額減損。由本金支付配息之相關資料已揭露於本公司網站，投資人可至本公司網站(<a
+                                href="https://www.Franklin.com.tw"
+                                target="_blank"
+                                title="富蘭克林‧國民的基金 官方網站"
+                                >https://www.Franklin.com.tw</a
+                            >)查閱。
+                        </li>
+                        <li>
+                            投資基金所應承擔之相關風險及應負擔之費用(含分銷費用)已揭露於基金公開說明書及投資人須知中，投資人可至境外基金資訊觀測站(<a
+                                href="https://www.fundclear.com.tw/"
+                                target="_blank"
+                                title="基金資訊觀測站"
+                                >https://www.fundclear.com.tw/</a
+                            >)下載，或逕向本公司網站(<a
+                                href="https://www.Franklin.com.tw"
+                                target="_blank"
+                                title="富蘭克林‧國民的基金 官方網站"
+                                >https://www.franklin.com.tw/</a
+                            >)查閱。
+                        </li>
+                        <li>
+                            本基金之收益分配由經理公司依基金孳息收入情況，決定應分配之收益金額。基金配息係依據基金投資組合之平均股利率為計算基礎，預估未來一年於投資標的個股取得之總股利收入，並考量當下已經實際取得的股利和可能發生之資本損益，適度調節並決定基金當月配息類股之配息率，以達成每月配息之頻率。經理公司視投資組合標的股利率水準變化及基金績效表現調整配息率，故配息率可能會有變動，若股利率未來有上升或下降之情形時，基金之配息來源可能為本金。此外，年化配息率之訂定應以平均年化股利率為參考基準，惟經理公司保留一定程度的彈性調整空間，並以避免配息過度侵蝕本金為原則。
+                        </li>
+                    </ul>
+                </div>
+                <div class="copyright">
+                    <div>版權所有富蘭克林證券投顧 FRANKLIN TEMPLETON INVESTMENTS</div>
+                </div>
+            </div>
+        </footer>
+
+                <transition name="go-top">
+                <div v-if="showGoTop" class="go-top-icon" @click="$scrollTo({ target: 'body' })">
+                    <i class="fas fa-caret-up go-top-caret-icon"></i>
+                    <span class="go-top-text">Top</span>
+                </div>
+            </transition>
+
+                <div class="float-btn two-btns">
+            <a
+                href="https://etrade.franklin.com.tw/ec/login"
+                class="float-btn-item"
+                title="立即申購"
+                target="_blank"
+                >立即申購</a
+            >
+            <!-- 第二顆按鈕 start -->
+            <a
+                href="https://etrade.franklin.com.tw/openAccount/"
+                class="float-btn-item"
+                title="預約開戶"
+                target="_blank"
+                >預約開戶</a
+            >
+            
+            
+            
+        </div>
+
+                
+            </sice-provider>
+        </div>
+
+        <!-- GTM -->
+        <script>
+            (function (w, d, s, l, i) {
+                w[l] = w[l] || [];
+                w[l].push({
+                    'gtm.start': new Date().getTime(),
+                    event: 'gtm.js',
+                });
+                var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s),
+                    dl = l != 'dataLayer' ? '&l=' + l : '';
+                j.async = true;
+                j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl;
+                f.parentNode.insertBefore(j, f);
+            })(window, document, 'script', 'dataLayer', 'GTM-PXDK43H');
+        </script>
+        <noscript>
+            <iframe
+                src="//www.googletagmanager.com/ns.html?id=GTM-PXDK43H"
+                height="0"
+                width="0"
+                style="display: none; visibility: hidden"
+            ></iframe>
+        </noscript>
+
+        <!-- APP -->
+        <script src="https://event.franklin.com.tw/commonResources/js/appUse/siceVueCmp.umd.min.js"></script>
+        <script src="https://event.franklin.com.tw/commonResources/js/appClick.js"></script>
+
+        <!-- optimize -->
+        <script defer src="https://www.googleoptimize.com/optimize.js?id=GTM-W36MB8M"></script>
+
+        <script src="js/main.js"></script>
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        <script>
+            AOS.init();
+        </script>
+    </body>
+</html>

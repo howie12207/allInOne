@@ -11,12 +11,15 @@
         <link rel="stylesheet" href="/css/normalize.css" />
         <link rel="stylesheet" href="/sample/css/style.css" />
 
+        <!-- 新增處link start -->
         <link
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
         />
+        <!-- 新增處link end -->
 
         <style>
+            /* 新增處style start */
             .swiper-tab-group {
                 width: 100%;
                 margin: 0 auto;
@@ -141,12 +144,16 @@
                     font-size: 26px;
                 }
             }
+            /* 新增處style end */
         </style>
         <script src="https://kit.fontawesome.com/0389e2f534.js" crossorigin="anonymous"></script>
+        <!-- 新增處script start -->
         <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+        <!-- 新增處script end -->
         <script src="https://event.franklin.com.tw/commonResources/js/vue-v2.min.js"></script>
     </head>
     <body>
+        <!-- 新增處body start -->
         <div id="swiper-content-1" class="container">
             <div class="swiper-tab-group">
                 <button
@@ -172,32 +179,77 @@
                     tab 3
                 </button>
             </div>
-                <p v-show="activeTab === 0" class="swiper-subtitle">This is subtitle of Tab 1.</p>
-                <p v-show="activeTab === 1" class="swiper-subtitle">This is subtitle of Tab 2.</p>
-                <p v-show="activeTab === 2" class="swiper-subtitle">This is subtitle of Tab 3.</p>
-                <div ref="mainSwiper" class="main-swiper">
-                    <div v-if="activeTab === 0" class="swiper-wrapper">
-                        <div class="swiper-slide">1-1</div>
-                        <div class="swiper-slide">1-2</div>
-                        <div class="swiper-slide">1-3</div>
-                    </div>
-                    <div v-if="activeTab === 1" class="swiper-wrapper">
-                        <div class="swiper-slide">2-1</div>
-                        <div class="swiper-slide">2-2</div>
-                        <div class="swiper-slide">2-3</div>
-                    </div>
-                    <div v-if="activeTab === 2" class="swiper-wrapper">
-                        <div class="swiper-slide">3-1</div>
-                        <div class="swiper-slide">3-2</div>
-                        <div class="swiper-slide">3-3</div>
-                    </div>
-                    <!-- 可選：頁籤 -->
-                    <div class="swiper-pagination"></div>
-                    <!-- 可選：前後頁控制 -->
-                    <div class="swiper-button-prev"></div>
-                    <div class="swiper-button-next"></div>
+            <p v-show="activeTab === 0" class="swiper-subtitle">This is subtitle of Tab 1.</p>
+            <p v-show="activeTab === 1" class="swiper-subtitle">This is subtitle of Tab 2.</p>
+            <p v-show="activeTab === 2" class="swiper-subtitle">This is subtitle of Tab 3.</p>
+            <div ref="mainSwiper" class="main-swiper">
+                <div v-if="activeTab === 0" class="swiper-wrapper">
+                    <div class="swiper-slide">1-1</div>
+                    <div class="swiper-slide">1-2</div>
+                    <div class="swiper-slide">1-3</div>
                 </div>
+                <div v-if="activeTab === 1" class="swiper-wrapper">
+                    <div class="swiper-slide">2-1</div>
+                    <div class="swiper-slide">2-2</div>
+                    <div class="swiper-slide">2-3</div>
+                </div>
+                <div v-if="activeTab === 2" class="swiper-wrapper">
+                    <div class="swiper-slide">3-1</div>
+                    <div class="swiper-slide">3-2</div>
+                    <div class="swiper-slide">3-3</div>
+                </div>
+                <!-- 可選：頁籤 -->
+                <div class="swiper-pagination"></div>
+                <!-- 可選：前後頁控制 -->
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
         </div>
-        <script src="./main.js"></script>
+        <!-- 新增處body end -->
+        <script>
+            new Vue({
+                el: '#swiper-content-1',
+                data() {
+                    return {
+                        // 新增處data start
+                        activeTab: 0,
+                        // 新增處data end
+                    };
+                },
+                mounted() {
+                    // 新增處mounted start
+                    this.$nextTick(() => {
+                        new Swiper('.main-swiper', {
+                            perPageView: 2,
+                            loop: true,
+                            autoplay: true,
+                            pagination: {
+                                el: '.swiper-pagination',
+                                clickable: true,
+                            },
+                            navigation: {
+                                nextEl: '.swiper-button-next',
+                                prevEl: '.swiper-button-prev',
+                            },
+                        });
+                    });
+                    // 新增處mounted end
+                },
+                methods: {
+                    // 新增處methods start
+                    handleTabClick(index) {
+                        this.activeTab = index;
+                        this.$nextTick(() => {
+                            this.$refs.mainSwiper.swiper.slideTo(0);
+                        });
+                    },
+                    // 新增處methods end
+                },
+                beforeDestroy() {
+                    // 新增處beforeDestroy start
+                    // 新增處beforeDestroy end
+                },
+            });
+        </script>
     </body>
 </html>
