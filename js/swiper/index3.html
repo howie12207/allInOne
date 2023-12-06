@@ -9,7 +9,10 @@
         <title>輪播效果</title>
 
         <link rel="stylesheet" href="/css/normalize.css" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+        />
 
         <style>
             .swiper-with-tab {
@@ -120,12 +123,13 @@
             }
         </style>
         <script src="https://kit.fontawesome.com/0389e2f534.js" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
         <script src="https://event.franklin.com.tw/commonResources/js/vue-v2.min.js"></script>
     </head>
     <body>
         <div class="swiper-with-tab">
-            <div id="swiper-content" class="swiper-content">
+            <div id="swiper-content-3" class="swiper-content">
                 <div ref="tabSwiper" class="tab-swiper">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide tab-swiper-slide" @click="handleTabClick(0)">
@@ -163,6 +167,6 @@
                 </div>
             </div>
         </div>
-        <script src="./main2.js"></script>
+        <script src="./main3.js"></script>
     </body>
 </html>
