@@ -5,6 +5,7 @@ new Vue({
             activeTab: 0,
             isFromMobile: false,
             autoplayInstance: null,
+            isInView: false,
         };
     },
     mounted() {
@@ -37,7 +38,6 @@ new Vue({
                 loop: this.isFromMobile,
                 autoplay: false,
                 speed: 600,
-                slideToClickedSlide: true,
                 pagination: {
                     el: '.swiper-pagination',
                     clickable: true,
@@ -45,12 +45,17 @@ new Vue({
                 ...paramsByWidth,
             });
             this.$refs.tabSwiper.swiper.on('slideChange', this.handleTabSlideChange);
+            if (this.isInView) this.startAutoplay();
         },
         handleTabClick(index) {
             this.activeTab = index;
             this.$refs.mainSwiper.swiper.slideTo(index);
-            this.clearAutoplayInstance();
-            this.handleAutoplay();
+            if (window.innerWidth >= 768) {
+                this.clearAutoplayInstance();
+                this.handleAutoplay();
+            } else {
+                this.$refs.tabSwiper.swiper.slideToLoop(this.activeTab);
+            }
         },
         handleTabSlideChange() {
             this.$nextTick(() => {
@@ -96,13 +101,17 @@ new Vue({
                 this.autoplayInstance = null;
             }
         },
+        startAutoplay() {
+            if (window.innerWidth >= 768) this.handleAutoplay();
+            else this.$refs.tabSwiper.swiper.autoplay.start();
+        },
         initIntersectionObserver() {
             const observer = new IntersectionObserver(
                 entries => {
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
-                            this.$refs.tabSwiper.swiper.autoplay.start();
-                            this.handleAutoplay();
+                            this.isInView = true;
+                            this.startAutoplay();
                         }
                     });
                 },
