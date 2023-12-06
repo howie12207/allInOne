@@ -1,5 +1,5 @@
 new Vue({
-    el: '#swiper-content',
+    el: '#swiper-content-1',
     data() {
         return {
             activeTab: 0,
