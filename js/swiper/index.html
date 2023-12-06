@@ -9,6 +9,8 @@
         <title>輪播效果</title>
 
         <link rel="stylesheet" href="/css/normalize.css" />
+        <link rel="stylesheet" href="/sample/css/style.css" />
+
         <link
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
@@ -53,10 +55,6 @@
                 border-top: solid 18px #d6edff;
                 border-left: solid 10px transparent;
                 border-right: solid 10px transparent;
-            }
-            .swiper-content-wrapper {
-                max-width: 1000px;
-                margin: 0 auto;
             }
             .main-swiper {
                 width: 100%;
@@ -149,7 +147,7 @@
         <script src="https://event.franklin.com.tw/commonResources/js/vue-v2.min.js"></script>
     </head>
     <body>
-        <div id="swiper-content-1">
+        <div id="swiper-content-1" class="container">
             <div class="swiper-tab-group">
                 <button
                     class="swiper-tab"
@@ -174,7 +172,6 @@
                     tab 3
                 </button>
             </div>
-            <div class="swiper-content-wrapper">
                 <p v-show="activeTab === 0" class="swiper-subtitle">This is subtitle of Tab 1.</p>
                 <p v-show="activeTab === 1" class="swiper-subtitle">This is subtitle of Tab 2.</p>
                 <p v-show="activeTab === 2" class="swiper-subtitle">This is subtitle of Tab 3.</p>
@@ -200,7 +197,6 @@
                     <div class="swiper-button-prev"></div>
                     <div class="swiper-button-next"></div>
                 </div>
-            </div>
         </div>
         <script src="./main.js"></script>
     </body>
