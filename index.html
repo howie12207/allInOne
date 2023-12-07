@@ -34,19 +34,66 @@
         <link rel="stylesheet" href="css/normalize.css" />
 
         <style>
+            #content {
+                display: flex;
+                max-height: 100vh;
+            }
+            .frame-wrapper {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+            }
+            .frame {
+                border: 1px solid #ccc;
+            }
             .async-hide {
                 opacity: 0 !important;
             }
-            .block {
-                margin: 24px 16px;
-            }
             .title {
                 font-weight: 700;
-                font-size: 24px;
+                font-size: 20px;
+                background: linear-gradient(264deg, #e3dbd8 0%, #fdecff 100%);
+                color: #005598;
+                padding: 8px 16px;
             }
-            a {
+            .checkbox-wrapper {
+                display: flex;
+                margin-left: 16px;
+            }
+            .content {
+                padding: 16px;
                 display: block;
-                margin: 8px 0;
+                cursor: pointer;
+                flex-grow: 1;
+                color: #6f6e6e;
+            }
+            nav {
+                width: 360px;
+                max-height: 100vh;
+                overflow: auto;
+            }
+            ul {
+                list-style-type: none;
+                padding: 0;
+                margin: 0;
+            }
+            .content:hover,
+            .opened {
+                color: #000;
+                text-decoration: underline;
+            }
+            ::-webkit-scrollbar {
+                width: 10px;
+                height: 10px;
+                background-color: #f5f5f5;
+            }
+            ::-webkit-scrollbar-thumb {
+                background: #b6b6b6;
+            }
+            ::-webkit-scrollbar-button {
+                display: none;
             }
         </style>
 
@@ -54,9 +101,37 @@
     </head>
     <body>
         <div id="content">
-            <div v-for="list of menuList" class="block">
-                <div class="title">{{ list.title }}</div>
-                <a v-for="item of list.content" :href="item.link">{{ item.text }}</a>
+            <nav>
+                <ul>
+                    <li v-for="(list,index) of menuList" :key="index">
+                        <div class="title">{{ list.title }}</div>
+                        <div class="checkbox-wrapper" v-for="item of list.content">
+                            <input
+                                type="checkbox"
+                                :id="list.content"
+                                :name="list.content"
+                                :value="list.content"
+                            />
+                            <div
+                                class="content"
+                                :class="currentItem.link === item.link && 'opened'"
+                                @click="()=>currentItem = item"
+                            >
+                                {{ item.text }}
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+            <div class="frame-wrapper">
+                <h1>{{currentItem.text}}</h1>
+                <iframe
+                    v-if="currentItem.link"
+                    :src="currentItem.link"
+                    width="60%"
+                    height="60%"
+                    class="frame"
+                ></iframe>
             </div>
         </div>
 
@@ -65,9 +140,13 @@
                 el: '#content',
                 data() {
                     return {
+                        currentItem: {
+                            link: '',
+                            text: '',
+                        },
                         menuList: [
                             {
-                                title: 'header',
+                                title: 'Header',
                                 content: [
                                     {
                                         link: './components/header/index1.html',
@@ -80,7 +159,7 @@
                                 ],
                             },
                             {
-                                title: 'footer',
+                                title: 'Footer',
                                 content: [
                                     {
                                         link: './components/footer/index.html',
@@ -160,8 +239,28 @@
                                     },
                                 ],
                             },
+                            {
+                                title: '輪播組件',
+                                content: [
+                                    {
+                                        link: './js/swiper/index2.html',
+                                        text: '基本輪播組',
+                                    },
+                                    {
+                                        link: './js/swiper/index1.html',
+                                        text: 'Tab對應不同輪播組',
+                                    },
+                                    {
+                                        link: './js/swiper/index3.html',
+                                        text: 'Tab對應單筆內容的輪播',
+                                    },
+                                ],
+                            },
                         ],
                     };
+                },
+                mounted() {
+                    this.currentItem = this.menuList[0].content[0];
                 },
                 methods: {
                     submit() {},
