@@ -202,17 +202,21 @@
                 methods: {
                     // 新增處methods start
                     initTabSwiper() {
-                        const paramsByWidth = this.isFromMobile
+                        let paramsByWidth = this.isFromMobile
                             ? {
-                                  slidesPerView: 2,
-                                  spaceBetween: 20,
+                                  breakpoints: {
+                                      320: {
+                                          slidesPerView: 2,
+                                          spaceBetween: 20,
+                                      },
+                                  },
                               }
                             : {
                                   slidesPerView: 4,
                                   spaceBetween: 20,
                               };
-
                         new Swiper('.tab-swiper', {
+                            slidesPerView: 1,
                             loop: this.isFromMobile,
                             autoplay: false,
                             speed: 600,
@@ -251,10 +255,12 @@
                             this.$refs.tabSwiper.swiper.destroy();
                             this.initTabSwiper();
                         };
-                        if (window.innerWidth < 768 && !this.isFromMobile) {
-                            this.isFromMobile = true;
-                            resetTabSwiper();
+                        if (window.innerWidth < 768) {
                             this.clearAutoplayInstance();
+                            if (!this.isFromMobile) {
+                                this.isFromMobile = true;
+                                resetTabSwiper();
+                            }
                         } else if (window.innerWidth > 767 && this.isFromMobile) {
                             this.isFromMobile = false;
                             resetTabSwiper();
