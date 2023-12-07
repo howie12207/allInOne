@@ -39,6 +39,7 @@
                 max-height: 100vh;
             }
             .frame-wrapper {
+                position: relative;
                 width: 100%;
                 display: flex;
                 justify-content: center;
@@ -95,6 +96,12 @@
             ::-webkit-scrollbar-button {
                 display: none;
             }
+            h1 {
+                color: #005598;
+                position: absolute;
+                top: 0;
+                left: 24px;
+            }
         </style>
 
         <script src="https://event.franklin.com.tw/commonResources/js/vue-v2.min.js"></script>
@@ -106,12 +113,6 @@
                     <li v-for="(list,index) of menuList" :key="index">
                         <div class="title">{{ list.title }}</div>
                         <div class="checkbox-wrapper" v-for="item of list.content">
-                            <input
-                                type="checkbox"
-                                :id="list.content"
-                                :name="list.content"
-                                :value="list.content"
-                            />
                             <div
                                 class="content"
                                 :class="currentItem.link === item.link && 'opened'"
@@ -128,7 +129,7 @@
                 <iframe
                     v-if="currentItem.link"
                     :src="currentItem.link"
-                    width="60%"
+                    width="70%"
                     height="60%"
                     class="frame"
                 ></iframe>
