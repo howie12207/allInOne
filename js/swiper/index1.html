@@ -26,6 +26,9 @@
                 padding-top: 32px;
                 display: flex;
                 justify-content: center;
+                min-width: 300px;
+                overflow-x: auto;
+                overflow-y: hidden;
             }
             .swiper-tab {
                 outline: none;
@@ -42,6 +45,7 @@
                 position: relative;
                 background-color: #fff;
                 font-weight: bold;
+                min-width: 96px;
             }
 
             .swiper-tab.active {
@@ -183,20 +187,22 @@
             <p v-show="activeTab === 1" class="swiper-subtitle">This is subtitle of Tab 2.</p>
             <p v-show="activeTab === 2" class="swiper-subtitle">This is subtitle of Tab 3.</p>
             <div ref="mainSwiper" class="main-swiper">
-                <div v-if="activeTab === 0" class="swiper-wrapper">
-                    <div class="swiper-slide">1-1</div>
-                    <div class="swiper-slide">1-2</div>
-                    <div class="swiper-slide">1-3</div>
-                </div>
-                <div v-if="activeTab === 1" class="swiper-wrapper">
-                    <div class="swiper-slide">2-1</div>
-                    <div class="swiper-slide">2-2</div>
-                    <div class="swiper-slide">2-3</div>
-                </div>
-                <div v-if="activeTab === 2" class="swiper-wrapper">
-                    <div class="swiper-slide">3-1</div>
-                    <div class="swiper-slide">3-2</div>
-                    <div class="swiper-slide">3-3</div>
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <template v-if="activeTab === 0"> 1-1</template>
+                        <template v-if="activeTab === 1"> 2-1</template>
+                        <template v-if="activeTab === 2"> 3-1</template>
+                    </div>
+                    <div class="swiper-slide">
+                        <template v-if="activeTab === 0"> 1-2</template>
+                        <template v-if="activeTab === 1"> 2-2</template>
+                        <template v-if="activeTab === 2"> 3-2</template>
+                    </div>
+                    <div class="swiper-slide">
+                        <template v-if="activeTab === 0"> 1-3</template>
+                        <template v-if="activeTab === 1"> 2-3</template>
+                        <template v-if="activeTab === 2"> 3-3</template>
+                    </div>
                 </div>
                 <!-- 可選：頁籤 -->
                 <div class="swiper-pagination"></div>
