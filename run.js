@@ -409,7 +409,7 @@ const run = async () => {
         indexHtml = indexHtml.replace(/<!-- floatAnimateBtn body -->/g, newBody);
     }
     async function swiperHandle() {
-        if (useSwiper === '0') return;
+        if (useSwiper === 0) return;
         const htmlFile = await readFileAsync(`js/swiper/index${useSwiper}.html`, 'utf8');
 
         // 新增swiper style
