@@ -13,13 +13,7 @@
         <meta property="og:type" content="website" />
         <meta property="fb:app_id" content="1060402337367331" />
 
-        <title>TODO標題</title>
-        <meta property="og:title" content="TODO標題" />
-        <meta name="twitter:title" content="TODO標題" />
-
-        <meta name="description" content="TODO描述" />
-        <meta property="og:description" content="TODO描述" />
-        <meta name="twitter:description" content="TODO描述" />
+        <title>Event</title>
 
         <link
             rel="shortcut icon"
@@ -39,15 +33,16 @@
                 max-height: 100vh;
             }
             .frame-wrapper {
-                position: relative;
-                width: 100%;
                 display: flex;
-                justify-content: center;
-                align-items: center;
                 flex-direction: column;
+                overflow-y: auto;
+                flex-grow: 1;
+                padding: 16px;
             }
             .frame {
                 border: 1px solid #ccc;
+                align-self: center;
+                flex-shrink: 0;
             }
             .async-hide {
                 opacity: 0 !important;
@@ -74,6 +69,7 @@
                 width: 360px;
                 max-height: 100vh;
                 overflow: auto;
+                flex-shrink: 0;
             }
             ul {
                 list-style-type: none;
@@ -96,15 +92,25 @@
             ::-webkit-scrollbar-button {
                 display: none;
             }
-            h1 {
+            .title-label {
                 color: #005598;
-                position: absolute;
-                top: 0;
-                left: 24px;
+                font-size: 32px;
+                font-weight: 700;
+                margin: 16px 0;
+                text-decoration: underline;
+            }
+            #markdown-content {
+                background-color: #eee;
+                padding: 16px;
+                border-radius: 4px;
+            }
+            pre {
+                white-space: pre-wrap;
             }
         </style>
 
         <script src="https://event.franklin.com.tw/commonResources/js/vue-v2.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/showdown@1.9.0/dist/showdown.min.js"></script>
     </head>
     <body>
         <div id="content">
@@ -116,7 +122,7 @@
                             <div
                                 class="content"
                                 :class="currentItem.link === item.link && 'opened'"
-                                @click="()=>currentItem = item"
+                                @click="clickLink(item)"
                             >
                                 {{ item.text }}
                             </div>
@@ -126,6 +132,8 @@
             </nav>
             <div class="frame-wrapper">
                 <h1>{{currentItem.text}}</h1>
+
+                <div class="title-label">Demo</div>
                 <iframe
                     v-if="currentItem.link"
                     :src="currentItem.link"
@@ -133,6 +141,9 @@
                     height="60%"
                     class="frame"
                 ></iframe>
+
+                <div class="title-label">說明文件</div>
+                <div id="markdown-content"></div>
             </div>
         </div>
 
@@ -144,6 +155,7 @@
                         currentItem: {
                             link: '',
                             text: '',
+                            readme: '',
                         },
                         menuList: [
                             {
@@ -152,10 +164,12 @@
                                     {
                                         link: './components/header/index1.html',
                                         text: '一般header',
+                                        readme: './components/header/readme.md',
                                     },
                                     {
                                         link: './components/header/index2.html',
                                         text: 'header帶menu',
+                                        readme: './components/header/readme.md',
                                     },
                                 ],
                             },
@@ -165,6 +179,7 @@
                                     {
                                         link: './components/footer/index.html',
                                         text: 'footer',
+                                        readme: './components/footer/readme.md',
                                     },
                                 ],
                             },
@@ -174,6 +189,7 @@
                                     {
                                         link: './components/goTop/index.html',
                                         text: '滑動至頂Icon',
+                                        readme: './components/goTop/readme.md',
                                     },
                                 ],
                             },
@@ -183,6 +199,7 @@
                                     {
                                         link: './components/floatBtn/index.html',
                                         text: '右側(下方)懸浮按鈕',
+                                        readme: './components/floatBtn/readme.md',
                                     },
                                 ],
                             },
@@ -192,6 +209,7 @@
                                     {
                                         link: './components/floatAnimateBtn/index.html',
                                         text: '右側(下方)懸浮動畫按鈕',
+                                        readme: './components/floatAnimateBtn/readme.md',
                                     },
                                 ],
                             },
@@ -201,6 +219,7 @@
                                     {
                                         link: './components/discount/index.html',
                                         text: '優惠組件',
+                                        readme: './components/discount/readme.md',
                                     },
                                 ],
                             },
@@ -210,6 +229,7 @@
                                     {
                                         link: './components/modal/index.html',
                                         text: '彈窗組件',
+                                        readme: './components/modal/readme.md',
                                     },
                                 ],
                             },
@@ -219,6 +239,7 @@
                                     {
                                         link: './components/banner/index.html',
                                         text: 'Banner',
+                                        readme: './components/banner/readme.md',
                                     },
                                 ],
                             },
@@ -228,6 +249,7 @@
                                     {
                                         link: './components/countTo/index.html',
                                         text: '數字漸變組件',
+                                        readme: './components/countTo/readme.md',
                                     },
                                 ],
                             },
@@ -237,6 +259,7 @@
                                     {
                                         link: './components/videoList/index.html',
                                         text: '影音專區',
+                                        readme: './components/videoList/readme.md',
                                     },
                                 ],
                             },
@@ -246,14 +269,17 @@
                                     {
                                         link: './js/swiper/index2.html',
                                         text: '基本輪播組',
+                                        readme: './js/swiper/readme.md',
                                     },
                                     {
                                         link: './js/swiper/index1.html',
                                         text: 'Tab對應不同輪播組',
+                                        readme: './js/swiper/readme.md',
                                     },
                                     {
                                         link: './js/swiper/index3.html',
                                         text: 'Tab對應單筆內容的輪播',
+                                        readme: './js/swiper/readme.md',
                                     },
                                 ],
                             },
@@ -262,9 +288,20 @@
                 },
                 mounted() {
                     this.currentItem = this.menuList[0].content[0];
+                    this.clickLink(this.menuList[0].content[0]);
                 },
                 methods: {
-                    submit() {},
+                    async clickLink(item) {
+                        this.currentItem = item;
+                        const converter = new showdown.Converter();
+                        let html;
+                        if (item.readme) {
+                            const req = await fetch(item.readme);
+                            const res = await req.text();
+                            html = converter.makeHtml(res);
+                        } else html = '暫無資料';
+                        document.getElementById('markdown-content').innerHTML = html;
+                    },
                 },
             });
         </script>
