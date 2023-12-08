@@ -20,13 +20,15 @@
 
         <style>
             /* 新增處style start */
-            .swiper-with-tab {
+            .swiper-content-3 {
                 background: #d6edff;
+                width: 100%;
+                overflow: hidden;
             }
-            .swiper-content {
+            .swiper-content-3 .swiper-content {
                 margin: 0 auto;
             }
-            .swiper-tab {
+            .swiper-content-3 .swiper-tab {
                 outline: none;
                 display: inline-block;
                 vertical-align: top;
@@ -43,16 +45,16 @@
                 width: 100%;
                 margin-bottom: 16px;
             }
-            .tab-swiper {
+            .swiper-content-3 .tab-swiper {
                 position: relative;
                 padding: 24px 0 32px 0;
             }
-            .swiper-tab.active {
+            .swiper-content-3 .swiper-tab.active {
                 color: #005598;
                 background: #fff;
                 border-color: #fff;
             }
-            .swiper-tab.active:before {
+            .swiper-content-3 .swiper-tab.active:before {
                 content: '';
                 position: absolute;
                 left: 50%;
@@ -62,13 +64,13 @@
                 border-left: solid 10px transparent;
                 border-right: solid 10px transparent;
             }
-            .main-swiper {
+            .swiper-content-3 .main-swiper {
                 width: 100%;
                 height: 200px;
                 position: relative;
                 overflow: hidden;
             }
-            .swiper-slide:not(.tab-swiper-slide) {
+            .swiper-content-3 .swiper-slide:not(.tab-swiper-slide) {
                 width: 100%;
                 height: 100%;
                 background-color: #ccc;
@@ -76,28 +78,28 @@
                 justify-content: center;
                 align-items: center;
             }
-            .swiper-pagination-bullet {
+            .swiper-content-3 .swiper-pagination-bullet {
                 width: 13px;
                 height: 13px;
                 border-radius: 50px;
             }
-            .swiper-pagination-bullet-active {
+            .swiper-content-3 .swiper-pagination-bullet-active {
                 background: #005598;
                 width: 25px;
             }
-            .swiper-subtitle {
+            .swiper-content-3 .swiper-subtitle {
                 text-align: center;
                 color: #3a3a3a;
                 font-size: 18px;
                 line-height: 1.75;
             }
             @media screen and (max-width: 767px) {
-                .swiper-slide-active .swiper-tab {
+                .swiper-content-3 .swiper-slide-active .swiper-tab {
                     color: #005598;
                     background: #fff;
                     border-color: #fff;
                 }
-                .swiper-slide-active .swiper-tab:before {
+                .swiper-content-3 .swiper-slide-active .swiper-tab:before {
                     content: '';
                     position: absolute;
                     left: 50%;
@@ -110,15 +112,15 @@
             }
 
             @media screen and (max-width: 991px) {
-                .swiper-content {
+                .swiper-content-3 .swiper-content {
                     width: 100%;
                 }
-                .swiper-tab {
+                .swiper-content-3 .swiper-tab {
                     font-size: 18px;
                     padding: 0 8px;
                     line-height: 1.5;
                 }
-                .swiper-subtitle {
+                .swiper-content-3 .swiper-subtitle {
                     font-size: 16px;
                 }
             }
@@ -132,8 +134,8 @@
     </head>
     <body>
         <!-- 新增處body start -->
-        <div class="swiper-with-tab container">
-            <div id="swiper-content-3" class="swiper-content">
+        <div id="swiper-content-3" class="container swiper-content-3">
+            <div class="swiper-content">
                 <div ref="tabSwiper" class="tab-swiper">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide tab-swiper-slide" @click="handleTabClick(0)">

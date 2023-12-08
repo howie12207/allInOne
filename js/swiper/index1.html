@@ -20,7 +20,7 @@
 
         <style>
             /* 新增處style start */
-            .swiper-tab-group {
+            .swiper-content-1 .swiper-tab-group {
                 width: 100%;
                 margin: 0 auto;
                 padding-top: 32px;
@@ -30,7 +30,7 @@
                 overflow-x: auto;
                 overflow-y: hidden;
             }
-            .swiper-tab {
+            .swiper-content-1 .swiper-tab {
                 outline: none;
                 display: inline-block;
                 vertical-align: top;
@@ -48,12 +48,12 @@
                 min-width: 96px;
             }
 
-            .swiper-tab.active {
+            .swiper-content-1 .swiper-tab.active {
                 color: #005598;
                 background: #d6edff;
                 border-color: #d6edff;
             }
-            .swiper-tab.active:before {
+            .swiper-content-1 .swiper-tab.active:before {
                 content: '';
                 position: absolute;
                 left: 50%;
@@ -63,13 +63,13 @@
                 border-left: solid 10px transparent;
                 border-right: solid 10px transparent;
             }
-            .main-swiper {
+            .swiper-content-1 .main-swiper {
                 width: 100%;
                 height: 200px;
                 position: relative;
                 overflow: hidden;
             }
-            .swiper-slide {
+            .swiper-content-1 .swiper-slide {
                 width: 100%;
                 height: 100%;
                 background-color: #ccc;
@@ -77,8 +77,8 @@
                 justify-content: center;
                 align-items: center;
             }
-            .swiper-button-prev,
-            .swiper-button-next {
+            .swiper-content-1 .swiper-button-prev,
+            .swiper-content-1 .swiper-button-next {
                 font-size: 0px;
                 position: absolute;
                 padding: 0px;
@@ -91,18 +91,18 @@
                 z-index: 1;
                 background: none;
             }
-            .swiper-button-prev::after,
-            .swiper-button-next::after {
+            .swiper-content-1 .swiper-button-prev::after,
+            .swiper-content-1 .swiper-button-next::after {
                 display: none;
             }
-            .swiper-button-prev:before {
+            .swiper-content-1 .swiper-button-prev:before {
                 content: '\f137';
             }
-            .swiper-button-next:before {
+            .swiper-content-1 .swiper-button-next:before {
                 content: '\f138';
             }
-            .swiper-button-prev::before,
-            .swiper-button-next::before {
+            .swiper-content-1 .swiper-button-prev::before,
+            .swiper-content-1 .swiper-button-next::before {
                 font-size: 42px;
                 line-height: 1;
                 border-radius: 100%;
@@ -110,20 +110,20 @@
                 font-weight: 900;
                 background-color: #fff;
             }
-            .swiper-pagination-bullet {
+            .swiper-content-1 .swiper-pagination-bullet {
                 width: 13px;
                 height: 13px;
                 border-radius: 50px;
             }
-            .swiper-pagination-bullet-active {
+            .swiper-content-1 .swiper-pagination-bullet-active {
                 background: #005598;
                 width: 25px;
             }
-            .swiper-button-next:hover,
-            .swiper-button-prev:hover {
+            .swiper-content-1 .swiper-button-next:hover,
+            .swiper-content-1 .swiper-button-prev:hover {
                 color: #007eff;
             }
-            .swiper-subtitle {
+            .swiper-content-1 .swiper-subtitle {
                 text-align: center;
                 color: #3a3a3a;
                 font-size: 18px;
@@ -131,20 +131,20 @@
             }
 
             @media screen and (max-width: 991px) {
-                .swiper-tab {
+                .swiper-content-1 .swiper-tab {
                     font-size: 18px;
                     margin: 0 5px;
                     padding: 0 8px;
                     line-height: 1.75;
                 }
-                .swiper-subtitle {
+                .swiper-content-1 .swiper-subtitle {
                     font-size: 16px;
                 }
             }
 
             @media screen and (max-width: 768px) {
-                .swiper-button-prev::before,
-                .swiper-button-next::before {
+                .swiper-content-1 .swiper-button-prev::before,
+                .swiper-content-1 .swiper-button-next::before {
                     font-size: 26px;
                 }
             }
@@ -158,7 +158,7 @@
     </head>
     <body>
         <!-- 新增處body start -->
-        <div id="swiper-content-1" class="container">
+        <div id="swiper-content-1" class="container swiper-content-1">
             <div class="swiper-tab-group">
                 <button
                     class="swiper-tab"
