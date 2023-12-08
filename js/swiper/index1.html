@@ -183,6 +183,7 @@
                     tab 3
                 </button>
             </div>
+            <!-- 可選：根據Tab切換的副標題 -->
             <p v-show="activeTab === 0" class="swiper-subtitle">This is subtitle of Tab 1.</p>
             <p v-show="activeTab === 1" class="swiper-subtitle">This is subtitle of Tab 2.</p>
             <p v-show="activeTab === 2" class="swiper-subtitle">This is subtitle of Tab 3.</p>
@@ -229,10 +230,12 @@
                             perPageView: 2,
                             loop: true,
                             autoplay: true,
+                            // <!-- 可選：頁籤 -->
                             pagination: {
                                 el: '.swiper-pagination',
                                 clickable: true,
                             },
+                            // <!-- 可選：前後頁控制 -->
                             navigation: {
                                 nextEl: '.swiper-button-next',
                                 prevEl: '.swiper-button-prev',
