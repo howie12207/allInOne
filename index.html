@@ -104,8 +104,12 @@
                 padding: 16px;
                 border-radius: 4px;
             }
-            pre {
+            #markdown-content pre {
                 white-space: pre-wrap;
+                background: #ccc;
+                padding: 16px;
+                border-radius: 4px;
+                margin-left: 40px;
             }
         </style>
 
@@ -136,14 +140,10 @@ https://cdn.jsdelivr.net/npm/markdown-it@13.0.2/dist/markdown-it.min.js
             <div class="frame-wrapper">
                 <h1>{{currentItem.text}}</h1>
 
-                <div class="title-label">Demo</div>
-                <iframe
-                    v-if="currentItem.link"
-                    :src="currentItem.link"
-                    width="70%"
-                    height="60%"
-                    class="frame"
-                ></iframe>
+                <template v-if="currentItem.link">
+                    <div class="title-label">Demo</div>
+                    <iframe :src="currentItem.link" width="70%" height="60%" class="frame"></iframe>
+                </template>
 
                 <div class="title-label">說明文件</div>
                 <div id="markdown-content"></div>
@@ -161,6 +161,15 @@ https://cdn.jsdelivr.net/npm/markdown-it@13.0.2/dist/markdown-it.min.js
                             readme: '',
                         },
                         menuList: [
+                            {
+                                title: '專案說明',
+                                content: [
+                                    {
+                                        text: '專案說明',
+                                        readme: './readme.md',
+                                    },
+                                ],
+                            },
                             {
                                 title: 'Header',
                                 content: [
