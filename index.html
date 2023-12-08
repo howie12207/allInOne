@@ -110,7 +110,10 @@
         </style>
 
         <script src="https://event.franklin.com.tw/commonResources/js/vue-v2.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/showdown@1.9.0/dist/showdown.min.js"></script>
+        <script src="
+https://cdn.jsdelivr.net/npm/markdown-it@13.0.2/dist/markdown-it.min.js
+"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/showdown@1.9.0/dist/showdown.min.js"></script> -->
     </head>
     <body>
         <div id="content">
@@ -209,7 +212,7 @@
                                     {
                                         link: './components/floatAnimateBtn/index.html',
                                         text: '右側(下方)懸浮動畫按鈕',
-                                        readme: './components/floatAnimateBtn/readme.md',
+                                        // readme: './components/floatAnimateBtn/readme.md',
                                     },
                                 ],
                             },
@@ -269,17 +272,17 @@
                                     {
                                         link: './js/swiper/index2.html',
                                         text: '基本輪播組',
-                                        readme: './js/swiper/readme.md',
+                                        // readme: './js/swiper/readme.md',
                                     },
                                     {
                                         link: './js/swiper/index1.html',
                                         text: 'Tab對應不同輪播組',
-                                        readme: './js/swiper/readme.md',
+                                        // readme: './js/swiper/readme.md',
                                     },
                                     {
                                         link: './js/swiper/index3.html',
                                         text: 'Tab對應單筆內容的輪播',
-                                        readme: './js/swiper/readme.md',
+                                        // readme: './js/swiper/readme.md',
                                     },
                                 ],
                             },
@@ -293,12 +296,12 @@
                 methods: {
                     async clickLink(item) {
                         this.currentItem = item;
-                        const converter = new showdown.Converter();
+                        var converter = new markdownit();
                         let html;
                         if (item.readme) {
                             const req = await fetch(item.readme);
                             const res = await req.text();
-                            html = converter.makeHtml(res);
+                            html = converter.render(res);
                         } else html = '暫無資料';
                         document.getElementById('markdown-content').innerHTML = html;
                     },
