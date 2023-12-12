@@ -16,12 +16,14 @@
 
         <style>
             /* 新增處style start */
+            .header-background {
+                background-color: #fafafa;
+            }
             .header-container {
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
                 height: 48px;
-                background-color: #fafafa;
             }
             .header-main {
                 display: flex;
@@ -127,6 +129,7 @@
                 background-color: #005598;
                 padding: 8px;
                 border-radius: 8px;
+                z-index: 9;
             }
             .hamberger .hamberger-line {
                 width: 24px;
@@ -160,45 +163,47 @@
     <body style="height: 500vh">
         <div id="content">
             <!-- 新增處body start -->
-            <header class="header-container container">
-                <a
-                    href="https://www.franklin.com.tw"
-                    title="富蘭克林‧國民的基金 官方網站"
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    class="header-main"
-                >
-                    <picture
-                        ><source
-                            media="(max-width: 1024px)"
-                            srcset="
-                                https://event.franklin.com.tw/commonResources/images/logo2019.svg
-                            " />
-                        <img
-                            src="https://event.franklin.com.tw/commonResources/images/header-logo.png"
-                            alt="富蘭克林‧國民的基金"
-                            class="logo-img"
-                    /></picture>
-                    <h1 class="header-title">富蘭克林‧國民的基金</h1>
-                </a>
-
-                <nav>
-                    <ul
-                        :class="['menu-list', isOpenMenu && 'menu-open']"
-                        @click="isOpenMenu = false"
+            <header class="header-background">
+                <div class="header-container container">
+                    <a
+                        href="https://www.franklin.com.tw"
+                        title="富蘭克林‧國民的基金 官方網站"
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        class="header-main"
                     >
-                        <!-- TODO 名稱及行為 -->
-                        <li><a href="#">精選基金</a></li>
-                        <li><a href="#">限時優惠</a></li>
-                        <li><a href="#">智慧理財</a></li>
-                        <li><a href="#">投資秘訣</a></li>
-                    </ul>
-                </nav>
+                        <picture
+                            ><source
+                                media="(max-width: 1024px)"
+                                srcset="
+                                    https://event.franklin.com.tw/commonResources/images/logo2019.svg
+                                " />
+                            <img
+                                src="https://event.franklin.com.tw/commonResources/images/header-logo.png"
+                                alt="富蘭克林‧國民的基金"
+                                class="logo-img"
+                        /></picture>
+                        <h1 class="header-title">富蘭克林‧國民的基金</h1>
+                    </a>
 
-                <div :class="['hamberger', isOpenMenu && 'menu-open']" @click="switchMenu">
-                    <div class="hamberger-line hamberger-line-1"></div>
-                    <div class="hamberger-line hamberger-line-2"></div>
-                    <div class="hamberger-line hamberger-line-3"></div>
+                    <nav>
+                        <ul
+                            :class="['menu-list', isOpenMenu && 'menu-open']"
+                            @click="isOpenMenu = false"
+                        >
+                            <!-- TODO 名稱及行為 -->
+                            <li><a href="#">精選基金</a></li>
+                            <li><a href="#">限時優惠</a></li>
+                            <li><a href="#">智慧理財</a></li>
+                            <li><a href="#">投資秘訣</a></li>
+                        </ul>
+                    </nav>
+
+                    <div :class="['hamberger', isOpenMenu && 'menu-open']" @click="switchMenu">
+                        <div class="hamberger-line hamberger-line-1"></div>
+                        <div class="hamberger-line hamberger-line-2"></div>
+                        <div class="hamberger-line hamberger-line-3"></div>
+                    </div>
                 </div>
             </header>
             <!-- 新增處body end -->

@@ -16,8 +16,6 @@ export const footerType = true;
 export const floatBtnType = '2';
 // 是否使用aos
 export const hasAos = true;
-// todo 是否使用輪播
-export const hasSwiper = false;
 // 是否使用數字漸變效果
 export const hasCountTo = false;
 // 是否使用自定義scrollBar
