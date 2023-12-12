@@ -111,6 +111,29 @@
                 border-radius: 4px;
                 margin-left: 40px;
             }
+            #markdown-content table {
+                border-collapse: collapse;
+                border-spacing: 0;
+                display: block;
+                width: 100%;
+                overflow: auto;
+            }
+            #markdown-content thead tr {
+                background-color: #f8f8f8;
+                border-top: 1px solid #ccc;
+            }
+            #markdown-content tbody tr:nth-child(odd) {
+                background-color: #f4f4f4;
+            }
+            #markdown-content tbody tr:nth-child(even) {
+                background-color: #f8f8f8;
+            }
+            #markdown-content th,
+            #markdown-content td {
+                text-align: left;
+                padding: 8px;
+                border: 1px solid #ddd;
+            }
         </style>
 
         <script src="https://event.franklin.com.tw/commonResources/js/vue-v2.min.js"></script>
@@ -299,11 +322,14 @@ https://cdn.jsdelivr.net/npm/markdown-it@13.0.2/dist/markdown-it.min.js
                     };
                 },
                 mounted() {
-                    this.currentItem = this.menuList[0].content[0];
-                    this.clickLink(this.menuList[0].content[0]);
+                    this.currentItem = this.menuList[7].content[0];
+                    this.clickLink(this.menuList[7].content[0]);
                 },
                 methods: {
                     async clickLink(item) {
+                        const frameEl = document.querySelector('.frame-wrapper');
+                        frameEl.scrollTo(0, 0);
+
                         this.currentItem = item;
                         var converter = new markdownit();
                         let html;
