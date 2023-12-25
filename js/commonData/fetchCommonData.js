@@ -11,8 +11,8 @@ const fetchCommonData = async () => {
         ];
         const isProd = prodList.includes(window.location.host);
         const req = isProd
-            ? await fetch("./commonData.json")
-            : await fetch("./commonData-dev.json");
+            ? await fetch("https://event.franklin.com.tw/commonResources/js/commonData.json")
+            : await fetch("https://event.franklin.com.tw/commonResources/js/commonData-dev.json");
         const res = await req.json();
         if (res.seasonDate) content.$set(content, "seasonDate", res.seasonDate);
     } catch (_) {
