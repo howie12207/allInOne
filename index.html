@@ -27,6 +27,13 @@
 
         <link rel="stylesheet" href="css/normalize.css" />
 
+        <!-- notification -->
+        <link rel="stylesheet" href="js/notification//style.css" />
+        <script src="js/notification/index.js"></script>
+        <script>
+            new
+        </script>
+
         <style>
             #content {
                 display: flex;
@@ -105,7 +112,9 @@
                 border-radius: 4px;
             }
             #markdown-content pre {
+                position: relative;
                 white-space: pre-wrap;
+                word-wrap: break-word;
                 background: #ccc;
                 padding: 16px;
                 border-radius: 4px;
@@ -133,6 +142,12 @@
                 text-align: left;
                 padding: 8px;
                 border: 1px solid #ddd;
+            }
+
+            .btn-copy {
+                position: absolute;
+                right: 0;
+                top: 0;
             }
         </style>
 
@@ -357,11 +372,30 @@ https://cdn.jsdelivr.net/npm/markdown-it@13.0.2/dist/markdown-it.min.js
                             const req = await fetch(item.readme);
                             const res = await req.text();
                             html = converter.render(res);
+                            const regex =
+                                /(<pre><code(?:\s+class=".*?")?>)([\s\S]*?)(<\/code><\/pre>)/g;
+                            html = html.replace(regex, (match, openTag, codeContent, closeTag) => {
+                                const content = codeContent.replace(/[\n\r]+/g, '');
+                                const btn = `<button class="btn-copy" onClick="copy('${content}')">copy</button>`;
+                                return `${openTag}${btn}${codeContent}${closeTag}`;
+                            });
                         } else html = '暫無資料';
                         document.getElementById('markdown-content').innerHTML = html;
+
+                        const copyBtns = document.querySelectorAll('.btn-copy');
                     },
                 },
             });
+
+            async function copy(data) {
+                const notifier = new AWN({ durations: { global: 1000 } });
+                try {
+                    await navigator.clipboard.writeText(data);
+                    notifier.success('複製成功');
+                } catch (_) {
+                    notifier.error('複製失敗');
+                }
+            }
         </script>
     </body>
 </html>
