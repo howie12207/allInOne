@@ -2,24 +2,275 @@
 
 ## 使用方法
 
+### 一般 Header
+
 1. 新增對應 css style
+
+```css
+.header-background {
+    background-color: #fafafa;
+}
+.header-container {
+    display: flex;
+    align-items: center;
+    height: 48px;
+}
+.header-main {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+.logo-img {
+    display: block;
+    width: 112px;
+}
+.header-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #005598;
+    margin: 0 0 0 8px;
+}
+@media (min-width: 768px) {
+    .header-container {
+        height: 56px;
+    }
+    .logo-img {
+        width: 144px;
+    }
+    .header-title {
+        font-size: 18px;
+    }
+}
+```
 
 2. 新增對應 body
 
 ```html
-<header>...</header>
+<header class="header-background">
+    <div class="header-container container">
+        <a
+            href="https://www.franklin.com.tw"
+            title="富蘭克林‧國民的基金 官方網站"
+            target="_blank"
+            rel="noreferrer noopener"
+            class="header-main"
+        >
+            <picture
+                ><source
+                    media="(max-width: 1024px)"
+                    srcset="https://event.franklin.com.tw/commonResources/images/logo2019.svg" />
+                <img
+                    src="https://event.franklin.com.tw/commonResources/images/header-logo.png"
+                    alt="富蘭克林‧國民的基金"
+                    class="logo-img"
+            /></picture>
+            <h1 class="header-title">富蘭克林‧國民的基金</h1>
+        </a>
+    </div>
+</header>
+```
+
+### header 帶 menu
+
+1. 新增對應 css style
+
+```css
+.header-background {
+    background-color: #fafafa;
+}
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 48px;
+}
+.header-main {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+.logo-img {
+    display: block;
+    width: 112px;
+}
+.header-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #005598;
+    margin: 0 0 0 8px;
+}
+@media (min-width: 768px) {
+    .header-container {
+        height: 56px;
+    }
+    .logo-img {
+        width: 144px;
+    }
+    .header-title {
+        font-size: 18px;
+    }
+}
+
+/* 菜單 */
+.menu-list {
+    display: none;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+.menu-list li {
+    text-align: center;
+}
+.menu-list a {
+    color: #000;
+    text-decoration: none;
+    transition: color, background-color 0.3s;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+}
+.menu-list a:hover {
+    color: #fff;
+    background-color: #005598;
+}
+@keyframes show-menu {
+    0% {
+        transform: translateX(160px);
+    }
+    100% {
+        transform: translateX(0px);
+    }
+}
+@media (min-width: 1024px) {
+    .menu-list {
+        display: flex;
+    }
+    .menu-list li {
+        margin: 0 8px;
+    }
+}
+@media (max-width: 1023px) {
+    .menu-list.menu-open {
+        display: block;
+        position: fixed;
+        width: max-content;
+        top: 64px;
+        right: 8px;
+        background-color: rgba(255, 255, 255, 0.9);
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
+        border-radius: 8px;
+        animation: show-menu 0.4s;
+        transform: translateX(0px);
+    }
+    .menu-list a {
+        display: inline-block;
+        padding: 16px 24px;
+    }
+    .menu-list a:hover {
+        color: #005598;
+        background-color: initial;
+    }
+}
+
+/* 小尺寸菜單Icon */
+.hamberger {
+    position: fixed;
+    right: 8px;
+    top: 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    background-color: #005598;
+    padding: 8px;
+    border-radius: 8px;
+    z-index: 9;
+}
+.hamberger .hamberger-line {
+    width: 24px;
+    border-radius: 4px;
+    border: 1px solid #fff;
+    background: #fff;
+    transition: 0.4s;
+}
+.hamberger.menu-open .hamberger-line-1 {
+    transform: translateY(6.5px) rotate(45deg);
+}
+.hamberger.menu-open .hamberger-line-2 {
+    opacity: 0;
+}
+.hamberger.menu-open .hamberger-line-3 {
+    transform: translateY(-6.5px) rotate(-45deg);
+}
+@media (min-width: 768px) {
+    .hamberger {
+        top: 8px;
+    }
+}
+@media (min-width: 1024px) {
+    .hamberger {
+        display: none;
+    }
+}
+```
+
+2. 新增對應 body
+
+```html
+<header class="header-background">
+    <div class="header-container container">
+        <a
+            href="https://www.franklin.com.tw"
+            title="富蘭克林‧國民的基金 官方網站"
+            target="_blank"
+            rel="noreferrer noopener"
+            class="header-main"
+        >
+            <picture
+                ><source
+                    media="(max-width: 1024px)"
+                    srcset="https://event.franklin.com.tw/commonResources/images/logo2019.svg" />
+                <img
+                    src="https://event.franklin.com.tw/commonResources/images/header-logo.png"
+                    alt="富蘭克林‧國民的基金"
+                    class="logo-img"
+            /></picture>
+            <h1 class="header-title">富蘭克林‧國民的基金</h1>
+        </a>
+
+        <nav>
+            <ul :class="['menu-list', isOpenMenu && 'menu-open']" @click="isOpenMenu = false">
+                <!-- TODO 名稱及行為 -->
+                <li><a href="#">精選基金</a></li>
+                <li><a href="#">限時優惠</a></li>
+                <li><a href="#">智慧理財</a></li>
+                <li><a href="#">投資秘訣</a></li>
+            </ul>
+        </nav>
+
+        <div :class="['hamberger', isOpenMenu && 'menu-open']" @click="switchMenu">
+            <div class="hamberger-line hamberger-line-1"></div>
+            <div class="hamberger-line hamberger-line-2"></div>
+            <div class="hamberger-line hamberger-line-3"></div>
+        </div>
+    </div>
+</header>
 ```
 
 3. 新增對應 data
 
 ```js
-isOpenMenu: false;
+isOpenMenu: false,
 ```
 
 4. 新增對應 methods
 
 ```js
 switchMenu() {
-    this.isOpenMenu = !this.isOpenMenu;
-},
+                        this.isOpenMenu = !this.isOpenMenu;
+                    },
 ```
