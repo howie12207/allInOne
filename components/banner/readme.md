@@ -4,6 +4,14 @@
 
 1. 新增對應 css style
 
+```css
+.banner-img {
+    display: block;
+    width: 100%;
+    object-fit: cover;
+}
+```
+
 2. 新增對應 body
 
 ```html
@@ -12,6 +20,7 @@
 <!-- 若是767px內則顯示source圖片 -->
 <!-- 若非則顯示img圖片 -->
 <!-- alt 屬性記得填寫 -->
+
 <picture>
     <source media="(max-width: 767px)" srcset="https://fakeimg.pl/720x1050/" />
     <img class="banner-img" src="https://fakeimg.pl/1920x770/" alt="" />
