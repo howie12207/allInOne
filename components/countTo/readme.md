@@ -2,24 +2,16 @@
 
 ## 使用方法
 
-1. 在 head 標籤中放入 vue-countTo js
+1. 新增對應 script
 
 ```html
-<head>
-    <script src="https://event.franklin.com.tw/commonResources/js/vueCountTo.min.js"></script>
-</head>
+<script src="https://event.franklin.com.tw/commonResources/js/vueCountTo.min.js"></script>
 ```
 
-2. 建立需求效果元素 <count-to></count-to>
+2. 新增對應 body
 
 ```html
-<count-to :start-val="0" :end-val="10000" :duration="3000"></count-to>
-```
-
-**若需出現後才開始效果則需添加 "only-show-start" 參數，請給一個唯一的 class 值**
-
-```html
-<count-to only-show-start="count_to" :start-val="0" :end-val="10000" :duration="3000"></count-to>
+<count-to only-show-start="count_to" :start-val="1" :end-val="5000" :duration="3000"></count-to>
 ```
 
 ## 參數介紹
@@ -34,7 +26,7 @@
 | separator       | 千分位切割符號 | ,       |      |
 | only-show-start | 是否顯示才執行 | false   |      |
 
-其餘請參考網站
+其餘請參考網站[Vue-countTo](https://github.com/PanJiaChen/vue-countTo)
 
 ## 備註
 
