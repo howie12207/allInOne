@@ -104,3 +104,10 @@ switchModal(target) {
                         this.$refs[target].showModal = !this.$refs[target].showModal;
                     },
 ```
+
+## 參數、事件介紹
+
+| 參數、事件名稱 | 描述 | Default | 備註 |
+| --- | --- | --- | --- |
+| ref | 參考值 | 必填 | 唯一值，不可與其他 ref 值重複 |
+| switchModal | 彈窗開關 | 此為事件 | 控制彈窗打開、關閉 <br/> switchModal('xxx') xxx 為指定的 ref |
