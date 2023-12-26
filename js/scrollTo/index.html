@@ -8,16 +8,18 @@
         />
         <title>滾動效果</title>
 
-        <!-- 新增處 -->
+        <!-- 新增處script start -->
         <script src="https://event.franklin.com.tw/commonResources/js/scrollTo.min.js"></script>
+        <!-- 新增處script end -->
 
         <!-- 為使用@click 配置Vue -->
         <script src="https://event.franklin.com.tw/commonResources/js/vue-v2.min.js"></script>
     </head>
     <body>
         <div id="content">
-            <!-- 新增處 -->
+            <!-- 新增處body start -->
             <button @click="$scrollTo({ target:'.aaa' })">滾動至class aaa</button>
+            <!-- 新增處body end -->
             <button @click="$scrollTo({ target:'#bbb' })">滾動至id bbb</button>
             <button @click="$scrollTo({ target:'.ccc', block: 'center'})">
                 滾動至class ccc並置中

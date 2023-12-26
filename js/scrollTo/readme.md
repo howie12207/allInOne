@@ -1,19 +1,17 @@
-# 滾動 效果
+# 滾動效果
 
 ## 使用方法
 
-1. 在 head 標籤中放入 scrollTo.js，同時檔案也需放到路徑下
+1. 新增對應 script
 
 ```html
-<head>
-    <script src="https://event.franklin.com.tw/commonResources/js/scrollTo.min.js"></script>
-</head>
+<script src="https://event.franklin.com.tw/commonResources/js/scrollTo.min.js"></script>
 ```
 
-2. 若功能為點擊後滑動，則在點擊的元素加上 @click="$scrollTo({ target: '.XXX' })" (.XXX 為 class 名稱)
+2. 針對需要有效果的元件加入@click $scrollTo
 
 ```html
-<button @click="$scrollTo({target: '.header'})"></button>
+<button @click="$scrollTo({ target:'.aaa' })">滾動至class aaa</button>
 ```
 
 ## 參數介紹
