@@ -29,4 +29,6 @@ export const hasModal = true;
 // 是否使用懸浮動畫按鈕
 export const hasFloatAnimateBtn = false;
 // 是否使用輪播組件 0:無 1: 上有固定的tab，切換不同輪播組 2:只有輪播 3:tab有mobile的輪播組
-export const useSwiper = 3;
+export const useSwiper = 0;
+// 是否使用制式化Table
+export const hasTable = false;

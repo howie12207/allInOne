@@ -1,5 +1,7 @@
 // modal vueComponent
 
+// baseTable vueComponent
+
 var content = new Vue({
     el: '#content',
     components: {
@@ -11,6 +13,7 @@ var content = new Vue({
             // goTop data
             // videoList data
             // swiper data
+            // baseTable data
         };
     },
     mounted() {

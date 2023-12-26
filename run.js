@@ -19,6 +19,7 @@ import {
     hasModal,
     hasFloatAnimateBtn,
     useSwiper,
+    hasTable,
 } from './setting.js';
 
 const readFileAsync = util.promisify(fs.readFile);
@@ -79,6 +80,8 @@ const run = async () => {
     await floatAnimateBtnHandle();
     // 新增swiper
     await swiperHandle();
+    // 替換table
+    await tableHandle();
 
     await writeFileAsync(`./${fileName}/index.html`, indexHtml, 'utf8');
     await writeFileAsync(`./${fileName}/css/style.scss`, styleScss, 'utf8');
@@ -453,6 +456,35 @@ const run = async () => {
             .replace(/\/\/ swiper mounted/g, newMainJsMounted)
             .replace(/\/\/ swiper beforeDestroy/g, newMainJsBeforeDestroy)
             .replace(/\/\/ swiper methods/g, newMainJsMethods);
+    }
+    // baseTable
+    async function tableHandle() {
+        if (!hasTable) {
+            indexHtml = indexHtml.replace(/<!-- baseTable body -->/g, '');
+            styleScss = styleScss.replace(/\/\/ baseTable style/g, '');
+            mainJs = mainJs
+                .replace('// baseTable vueComponent', '')
+                .replace(/\/\/ baseTable data/g, '');
+            return;
+        }
+
+        const htmlFile = await readFileAsync(`components/baseTable/index.html`, 'utf8');
+
+        const newStyle = copyData(htmlFile, '/* 新增處style start */', '/* 新增處style end */');
+        styleScss = styleScss.replace(/\/\/ baseTable style/g, newStyle);
+
+        const newBody = copyData(htmlFile, '<!-- 新增處body start -->', '<!-- 新增處body end -->');
+        indexHtml = indexHtml.replace(/<!-- baseTable body -->/g, newBody);
+
+        const newVueComponents = copyData(
+            htmlFile,
+            '// 新增處vueComponent start',
+            '// 新增處vueComponent end'
+        );
+        const newData = copyData(htmlFile, '// 新增處data start', '// 新增處data end');
+        mainJs = mainJs
+            .replace('// baseTable vueComponent', newVueComponents)
+            .replace('// baseTable data', newData);
     }
 };
 run();
