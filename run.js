@@ -134,13 +134,16 @@ const run = async () => {
     }
     // footer
     async function footerHandle() {
-        if (!footerType) return;
-        let htmlFile = await readFileAsync(`components/footer/index.html`, 'utf8');
+        if (!footerType) {
+            styleScss = styleScss.replace(/\/\/ footer style/g, '');
+            indexHtml = indexHtml.replace(/<!-- footer body -->/g, '');
+            return;
+        }
+        let htmlFile = await readFileAsync(`components/footer/index${footerType}.html`, 'utf8');
 
         // 新增style
         const newStyle = copyData(htmlFile, '/* 新增處style start */', '/* 新增處style end */');
-        styleScss = `${styleScss}
-        ${newStyle}`;
+        styleScss = styleScss.replace(/\/\/ footer style/g, newStyle);
 
         // 替換body
         const newBody = copyData(htmlFile, '<!-- 新增處body start -->', '<!-- 新增處body end -->');

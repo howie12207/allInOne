@@ -1,0 +1,302 @@
+# footer2
+
+## 使用方法
+
+1. 新增對應 css style
+
+```css
+.footer {
+    position: relative;
+    color: #313e54;
+    background: #f2f2f2;
+    padding: 40px 0px 0;
+
+    --background-rainbow: linear-gradient(
+        90deg,
+        #df1c4b 0%,
+        #f41f5e 15%,
+        #f96585 25%,
+        #f8613c 40%,
+        #b495cd 50%,
+        #ceabf9 60%,
+        #797df2 75%,
+        #489cf6 85%,
+        #6f59ed 100%
+    );
+}
+.footer::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 16px;
+    top: 0;
+    background: var(--background-rainbow);
+}
+.footer-head {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 24px;
+}
+.footer-company-name {
+    font-size: 22px;
+    margin: 16px 0;
+}
+.footer-company-desc {
+    font-size: 14px;
+}
+.footer-head-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    font-weight: 700;
+}
+.footer-head-phone {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.footer-head-phone-number {
+    font-size: 36px;
+    color: #021d3a;
+    text-decoration: none;
+}
+.footer-social-media {
+    padding: 0px;
+    margin: 0px;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+.footer-social-media-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: #fff;
+    transition: 0.3s ease all;
+    background: #021d3a;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 22px;
+}
+.footer-warning {
+    position: relative;
+    padding: 24px 0 0;
+}
+.footer-warning::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    top: -2px;
+    background: var(--background-rainbow);
+}
+.footer-warning ul {
+    padding: 0px;
+    margin: 0px;
+    list-style: none;
+    font-size: 15px;
+}
+.footer-warning ul li {
+    margin-bottom: 16px;
+    line-height: 1.5;
+}
+.footer-copyright-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: max-content;
+    font-size: 12px;
+    border: solid 1px #50ffcf;
+    margin: auto;
+    padding: 4px 32px;
+    border-radius: 30px;
+    background: linear-gradient(90deg, rgba(75, 153, 255, 0.4) 0%, rgba(214, 125, 255, 0.5) 100%);
+    line-height: 1.2rem;
+}
+.footer-bottom-contact {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 12px;
+    color: #fff;
+    background-color: #021d3a;
+    padding: 16px 0;
+    margin: 40px 0 0;
+}
+.footer-bottom-contact::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    top: -4px;
+    background: var(--background-rainbow);
+}
+@media screen and (min-width: 768px) {
+    .footer-head {
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+    .footer-social-media {
+        order: -1;
+    }
+}
+@media screen and (min-width: 1024px) {
+    .footer-head {
+        text-align: left;
+        justify-content: space-between;
+    }
+    .footer-head-contact {
+        flex-direction: row;
+        align-self: flex-end;
+    }
+    .footer-head-phone {
+        flex-direction: row;
+        align-items: center;
+    }
+}
+```
+
+2. 新增對應 body
+
+```html
+<footer class="footer">
+    <div class="container">
+        <div class="footer-head">
+            <div class="footer-head-company">
+                <a href="http://www.franklin.com.tw/" target="_blank" title="富蘭克林證券投顧">
+                    <img
+                        src="https://event.franklin.com.tw/commonResources/images/footer-logo_darkblue.png"
+                        alt="富蘭克林證券投顧"
+                        width="216"
+                        height="46"
+                    />
+                </a>
+                <div class="footer-company-name">富蘭克林證券投資顧問(股)公司</div>
+                <div class="footer-company-desc">
+                    101年金管投顧新字第025號 | 富蘭克林證券投顧獨立經營管理
+                </div>
+            </div>
+            <div class="footer-head-contact">
+                <div class="footer-head-phone">
+                    <div class="footer-head-phone-title">國民理財專線：</div>
+                    <a
+                        href="tel:0800-885-888"
+                        title="國民理財專線"
+                        class="footer-head-phone-number"
+                    >
+                        0800-885-888
+                    </a>
+                </div>
+                <ul class="footer-social-media">
+                    <li>
+                        <a
+                            href="https://www.youtube.com/user/franklin0800885888"
+                            target="_blank"
+                            title="youtube"
+                            class="footer-social-media-item"
+                        >
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="https://www.facebook.com/franklin.taiwan/"
+                            target="_blank"
+                            title="粉絲團"
+                            class="footer-social-media-item"
+                        >
+                            <i class="fab fa-facebook-square"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="http://line.naver.jp/ti/p/%40franklin"
+                            target="_blank"
+                            title="Line"
+                            class="footer-social-media-item"
+                        >
+                            <i class="fab fa-line"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-warning">
+            <ul>
+                <li>
+                    本公司所提供之資訊，僅供接收人之參考用途。本公司當盡力提供正確之資訊，所載資料均來自或本諸我們相信可靠之來源，但對其完整性、即時性和正確性不做任何擔保，如有錯漏或疏忽，本公司或關係企業與其任何董事或受僱人，並不負任何法律責任。任何人因信賴此等資料而做出或改變投資決策，須自行承擔結果。本網頁所載資料或任何部份均不可以進行抄錄、翻印或另作派發。
+                </li>
+                <li>
+                    <strong>
+                        本境外基金經金融監督管理委員會核准或申報生效在國內募集及銷售，惟不表示絕無風險。基金經理公司以往之經理績效不保證基金之最低投資收益；基金經理公司除盡善良管理人之注意義務外，不負責本基金之盈虧，亦不保證最低之收益，投資人申購前應詳閱基金公開說明書。
+                    </strong>
+                </li>
+                <li>
+                    <strong>
+                        由於非投資等級債券之信用評等未達投資等級或未經信用評等，且對利率變動的敏感度甚高，故本基金可能會因利率上升、市場流動性下降，或債券發行機構違約不支付本金、利息或破產而蒙受虧損。本基金不適合無法承擔相關風險之投資人。基金經理公司以往之經理績效不保證基金之最低投資收益；基金經理公司除盡善良管理人之注意義務外，不負責本基金之盈虧，亦不保證最低之收益，投資人申購前應詳閱基金公開說明書。本基金較適合投資屬性中風險承受度較高之投資人，投資人投資以非投資等級債券為訴求之基金不宜占其投資組合過高之比重，投資人應審慎評估。
+                    </strong>
+                </li>
+                <li>
+                    <strong>
+                        基金的配息可能由基金的收益或本金中支付。部分基金進行配息前未先扣除應負擔之費用。任何涉及由本金支出的部份，可能導致原始投資金額減損。由本金支付配息之相關資料已揭露於本公司網站，投資人可至本公司網站(<a
+                            href="https://www.franklin.com.tw"
+                            target="_blank"
+                            title="富蘭克林‧國民的基金 官方網站"
+                            >https://www.franklin.com.tw</a
+                        >)查閱。
+                    </strong>
+                </li>
+                <li>投資人申購本基金係持有基金受益憑證，而非本文提及之投資資產或標的</li>
+                <li>
+                    本文提及之經濟走勢不必然代表本基金之績效，本基金投資風險請詳閱基金公開說明書。
+                </li>
+                <li>
+                    投資基金所應承擔之相關風險及應負擔之費用(含分銷費用)已揭露於基金公開說明書及投資人須知中，投資人可至境外基金資訊觀測站(<a
+                        href="https://www.fundclear.com.tw"
+                        target="_blank"
+                        title="基金資訊觀測站"
+                        >https://www.fundclear.com.tw</a
+                    >)下載，或逕向本公司網站(<a
+                        href="https://www.franklin.com.tw"
+                        target="_blank"
+                        title="富蘭克林‧國民的基金 官方網站"
+                        >https://www.franklin.com.tw</a
+                    >)查閱。
+                </li>
+                <li>
+                    <strong>
+                        【穩定月配股(Mdis-pc)】及【月配股(Mdis)】皆為基金的配息可能由基金的收益或本金中支付，惟目前【月配股(Mdis)】實際收益分配係以配發債息收入為主，並不分配資本利得。【穩定月配股(Mdis-pc)】因股份英文名稱帶有pc係指配息預定以固定配息率方式提供，依照基金投資組合產生的收益來源致力維持每月較穩定的配息率。本基金公司將定期檢討基金配息金額與配息率是否有調整必要，以避免分配過度而侵蝕到本金。檢視內容主要包括投組的當期收益率與到期殖利率預估、經理團隊債市展望及操作調整等。基金的配息可能由基金的收益或本金中支付。任何涉及由本金支出的部份，可能導致原始投資金額減損。本基金進行配息前未先扣應負擔之費用。
+                    </strong>
+                </li>
+                <li>
+                    <strong>
+                        本基金有相當比重投資於符合美國Rule
+                        144A規定之私募性質債券，較可能發生流動性不足，財務訊息揭露不完整或因價格不透明導致波動性較大之風險，投資人須留意相關風險。
+                    </strong>
+                </li>
+            </ul>
+        </div>
+
+        <div class="footer-copyright-text">
+            <span>版權所有富蘭克林證券投顧</span>
+            <span>FRANKLIN TEMPLETON INVESTMENTS</span>
+        </div>
+    </div>
+
+    <div class="footer-bottom-contact">
+        <span>106台北市大安區忠孝東路四段87號8樓</span>
+        <span>電話: (02)2781-0088 &nbsp 傳真: (02)2781-7788</span>
+    </div>
+</footer>
+```

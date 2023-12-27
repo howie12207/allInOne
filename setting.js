@@ -10,8 +10,8 @@ export const headerType = 1;
 export const hasBanner = false;
 // 是否有右下角往上滾Icon
 export const hasGoTopIcon = true;
-// footer
-export const footerType = true;
+// footer類型 0:無 1:第一款 2:第二款
+export const footerType = 2;
 // 側邊懸浮按鈕類型 0:無 1:一顆按鈕 2:二顆按鈕 3:三顆按鈕
 export const floatBtnType = '2';
 // 是否使用aos
