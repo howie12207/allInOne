@@ -32,3 +32,5 @@ export const hasFloatAnimateBtn = false;
 export const useSwiper = 0;
 // 是否使用制式化Table
 export const hasTable = false;
+// 是否使用常用資料(優惠日期)
+export const hasCommonData = false;

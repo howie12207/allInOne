@@ -20,6 +20,7 @@ import {
     hasFloatAnimateBtn,
     useSwiper,
     hasTable,
+    hasCommonData,
 } from './setting.js';
 
 const readFileAsync = util.promisify(fs.readFile);
@@ -82,6 +83,8 @@ const run = async () => {
     await swiperHandle();
     // 替換table
     await tableHandle();
+    // 替換commonData
+    await commonDataHandle();
 
     await writeFileAsync(`./${fileName}/index.html`, indexHtml, 'utf8');
     await writeFileAsync(`./${fileName}/css/style.scss`, styleScss, 'utf8');
@@ -500,6 +503,33 @@ const run = async () => {
         mainJs = mainJs
             .replace('// baseTable vueComponent', newVueComponents)
             .replace('// baseTable data', newData);
+    }
+    // commonData
+    async function commonDataHandle() {
+        if (hasCommonData) {
+            const htmlFile = await readFileAsync(`js/commonData/index.html`, 'utf8');
+            const newLink = copyData(
+                htmlFile,
+                '<!-- 新增處link start -->',
+                '<!-- 新增處link end -->'
+            );
+            // 替換commonData body
+            const newBody = copyData(
+                htmlFile,
+                '<!-- 新增處body start -->',
+                '<!-- 新增處body end -->'
+            );
+            indexHtml = indexHtml
+                .replace(/<!-- commonData link -->/g, newLink)
+                .replace(/<!-- commonData body -->/g, newBody);
+            const newMainJsData = copyData(htmlFile, '// 新增處data start', '// 新增處data end');
+            mainJs = mainJs.replace(/\/\/ commonData data/g, newMainJsData);
+        } else {
+            indexHtml = indexHtml
+                .replace(/<!-- commonData link -->/g, '')
+                .replace(/<!-- commonData body -->/g, '');
+            mainJs = mainJs.replace(/\/\/ commonData data/g, '');
+        }
     }
 };
 run();

@@ -14,6 +14,7 @@ var content = new Vue({
             // videoList data
             // swiper data
             // baseTable data
+            // commonData data
         };
     },
     mounted() {

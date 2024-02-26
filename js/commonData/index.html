@@ -17,21 +17,22 @@
     </head>
     <body>
         <div id="content">
-            <!-- 運用方式 -->
+            <!-- 新增處body start -->
             <span>{{ seasonDate }}</span>
+            <!-- 新增處body end -->
         </div>
 
-        <!-- 新增處script start -->
         <script>
             var content = new Vue({
                 el: '#content',
                 data() {
                     return {
+                        // 新增處data start
                         seasonDate: '',
+                        // 新增處data end
                     };
                 },
             });
         </script>
-        <!-- 新增處script end -->
     </body>
 </html>
